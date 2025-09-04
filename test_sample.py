@@ -12,3 +12,7 @@ class Test_Linear_Search: # Pass
     def test_large_range(self): # Pass
         result = searchAlgor.LinearSearchAlgor(88, range(23, 125))
         assert result, 65
+
+    def test_key_not_found(self):
+        result = searchAlgor.LinearSearchAlgor(67, range(78, 170))
+        assert "None"
