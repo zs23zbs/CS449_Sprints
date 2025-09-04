@@ -13,6 +13,27 @@ class Test_Linear_Search: # Pass
         result = searchAlgor.LinearSearchAlgor(88, range(23, 125))
         assert result, 65
 
-    def test_key_not_found(self):
+    def test_key_not_found(self): # Pass
         result = searchAlgor.LinearSearchAlgor(67, range(78, 170))
         assert "None"
+
+class Test_Binary_Search:
+    def test_small_(self): # Pass
+        list = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+        first_element = list[0]
+        sort_list = sorted(list)
+        low = list.index(first_element)
+        high = len(list) - 1
+
+        result = searchAlgor.BinarySearchAlgor(sort_list, 20, low, high)
+        assert result, 5
+    
+    def test_large_range(self): # Passes 
+        list = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 34, 45, 67, 89, 94, 101, 120, 495, 283, 596, 294, 300, 319, 314, 3, 6, 8]
+        first_element = list[0]
+        sort_list = sorted(list)
+        low = list.index(first_element)
+        high = len(list) - 1
+
+        result = searchAlgor.BinarySearchAlgor(sort_list, 596, low, high)
+        assert result, 32
