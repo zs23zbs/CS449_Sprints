@@ -1,3 +1,4 @@
+import pytest
 import searchAlgor
 
 class Test_Linear_Search():
