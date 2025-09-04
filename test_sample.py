@@ -1,10 +1,5 @@
 import searchAlgor
 
-"""Notes to Self:
-* Using Python 3.9.6 for pytest to work, DON'T CHANGE Python: Select Interpreter 
-* command specifically for interpreter, executing the pytests is "pytest" itsef. 
-* command+Shift+P for fast track on terminal """
-
 class Test_Linear_Search: # Pass
     def test_small_range(self):
         result = searchAlgor.LinearSearchAlgor(2, range(1,3))
