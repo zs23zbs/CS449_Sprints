@@ -15,7 +15,7 @@ class Test_Linear_Search: # Pass
 
     def test_key_not_found(self): # Pass
         result = searchAlgor.LinearSearchAlgor(67, range(78, 170))
-        assert "None"
+        assert result == print(result)
 
 class Test_Binary_Search:
     def test_small_(self): # Pass
@@ -37,3 +37,13 @@ class Test_Binary_Search:
 
         result = searchAlgor.BinarySearchAlgor(sort_list, 596, low, high)
         assert result, 32
+    
+    def test_no_key_found(self):  
+        list = [45, 684, 283, 749, 8, 10, 293]
+        first_element = list[0]
+        sort_list = sorted(list)
+        low = list.index(first_element)
+        high = len(list) - 1
+
+        result = searchAlgor.BinarySearchAlgor(sort_list, 1, low, high)
+        assert result == print(result)
