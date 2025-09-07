@@ -31,14 +31,14 @@ mode_label = tk.Label(master=mode_frame, text=f"MODE:", fg="black", bg="#E0FFFF"
 game_modes = ["Simple Game", "General Game"]
 
 def pick_mode(): # Fuction for selecting whichever game mode for the radio button
-    mode_label.config(text=f"MODE: {variable.get()}")
-variable = tk.StringVar(mode_frame, f"{game_modes[0]}")
+    mode_label.config(text=f"MODE: {variable1.get()}")
+variable1 = tk.StringVar(mode_frame, f"{game_modes[0]}")
 
 for i, modes in enumerate(game_modes): # Iterate through the game_modes list to display the different game versions users wants 
     tk.Radiobutton(
         master=mode_frame,
         text=modes,
-        variable=variable,
+        variable=variable1,
         value=modes,
         command = pick_mode
     ).grid(row=i+1, column=0, sticky="ew", padx=4, pady=4)
@@ -51,4 +51,20 @@ redPlayer_frame = tk.Frame(master=window, bd=1, relief=tk.RAISED, bg="#DC143C")
 redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED Player:", fg="black", bg="#E9967A")
 redPlayer_modes = ["Human", "Computer"]
  
+def pick_playerType(): # Fuction for selecting whichever game mode for the radio button
+    redPlayer_label.config(text=f"RED Player:: {variable2.get()}")
+variable2 = tk.StringVar(redPlayer_frame, f"{redPlayer_modes[0]}")
+
+for i, player in enumerate(redPlayer_modes):
+    tk.Radiobutton(
+        master=redPlayer_frame,
+        text=player,
+        variable=variable2,
+        value=player,
+        command = pick_playerType
+    ).grid(row=i+1, column=0, sticky="ne", padx=4, pady=4)
+
+redPlayer_label.grid(row=2, column=0, sticky="ne", padx=5, pady=5)
+redPlayer_frame.grid(row=2, column=0, sticky="ne", padx=5, pady=5)
+
 window.mainloop()
