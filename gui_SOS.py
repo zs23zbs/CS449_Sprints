@@ -67,4 +67,9 @@ for i, player in enumerate(redPlayer_modes):
 redPlayer_label.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
 redPlayer_frame.grid(row=2, column=0, padx=5, pady=5)
 
+"""Blue Player Widget"""
+bluePlayer_frame = tk.Frame(master=window, bd=2, relief=tk.RAISED, bg="#0000CD")
+bluePlayer_label = tk.Label(master=bluePlayer_frame, text=f"BLUE PLAYER (B):", fg="black", bg="#1E90FF")
+bluePlayer_modes = ["Human", "Computer"]
+
 window.mainloop()
