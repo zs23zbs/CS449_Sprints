@@ -4,7 +4,7 @@ import tkinter as tk
 window = tk.Tk()
 window.title("SOS TicTacToe")
 
-"""Creating TicTacToe Board"""
+"""Creating TicTacToe Board Display"""
 for i in range(5):
     window.columnconfigure(i, weight=5, minsize=100)
     window.rowconfigure(i, weight=5, minsize=100)
@@ -46,4 +46,9 @@ for i, modes in enumerate(game_modes): # Iterate through the game_modes list to 
 mode_label.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 mode_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 
+"""Red Player Widget"""
+redPlayer_frame = tk.Frame(master=window, bd=1, relief=tk.RAISED, bg="#DC143C")
+redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED Player:", fg="black", bg="#E9967A")
+redPlayer_modes = ["Human", "Computer"]
+ 
 window.mainloop()
