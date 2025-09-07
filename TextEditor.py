@@ -48,6 +48,6 @@ btn_save.grid(row=1, column=0, sticky="ew", padx=5)
 
 #Create a grid for the window 
 frm_buttons.grid(row=0, column=0, sticky="ns")
-txt_edit.grid(row=0, column=1, sticky="nsew")
+txt_edit.grid(row=0, column=1, sticky="ns")
 
 window.mainloop()
