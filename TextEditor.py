@@ -1,4 +1,4 @@
-"""This was ultimately used as practice for Tkinter GUI"""
+"""Practice/Seeing Versions of a GUI"""
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 
