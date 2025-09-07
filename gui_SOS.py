@@ -44,15 +44,15 @@ for i, modes in enumerate(game_modes): # Iterate through the game_modes list to 
     ).grid(row=i+1, column=0, sticky="ew", padx=4, pady=4)
 
 mode_label.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
-mode_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
+mode_frame.grid(row=0, column=0, padx=5, pady=5)
 
 """Red Player Widget"""
-redPlayer_frame = tk.Frame(master=window, bd=1, relief=tk.RAISED, bg="#DC143C")
-redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED Player:", fg="black", bg="#E9967A")
+redPlayer_frame = tk.Frame(master=window, bd=2, relief=tk.RAISED, bg="#DC143C")
+redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED PLAYER (R):", fg="black", bg="#E9967A")
 redPlayer_modes = ["Human", "Computer"]
  
 def pick_playerType(): # Fuction for selecting whichever game mode for the radio button
-    redPlayer_label.config(text=f"RED Player:: {variable2.get()}")
+    redPlayer_label.config(text=f"RED Player: {variable2.get()}")
 variable2 = tk.StringVar(redPlayer_frame, f"{redPlayer_modes[0]}")
 
 for i, player in enumerate(redPlayer_modes):
@@ -62,9 +62,9 @@ for i, player in enumerate(redPlayer_modes):
         variable=variable2,
         value=player,
         command = pick_playerType
-    ).grid(row=i+1, column=0, sticky="ne", padx=4, pady=4)
+    ).grid(row=i+3, column=0, sticky="ew", padx=4, pady=4)
 
-redPlayer_label.grid(row=2, column=0, sticky="ne", padx=5, pady=5)
-redPlayer_frame.grid(row=2, column=0, sticky="ne", padx=5, pady=5)
+redPlayer_label.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
+redPlayer_frame.grid(row=2, column=0, padx=5, pady=5)
 
 window.mainloop()
