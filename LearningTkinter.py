@@ -2,11 +2,16 @@ import tkinter as tk
 
 window = tk.Tk()
 
-def handle_keypress(event):
-    """Print the character associated to the key pressed"""
-    print(event.char)
+window.rowconfigure(0, minsize=50, weight=1)
+window.columnconfigure([0,1,2], minsize=50, weight=1)
 
-# Bind keypress event to handle_keypress()
-window.bind("<Key>", handle_keypress)
+btn_decrease = tk.Button(master=window, text="-")
+btn_decrease.grid(row=0, column=0, sticky="nsew")
+
+lb1_value = tk.Label(master=window, text="0")
+lb1_value.grid(row=0, column=1)
+
+btn_increase = tk.Button(master=window, text="+")
+btn_increase.grid(row=0, column=2, sticky="nsew")
 
 window.mainloop()
