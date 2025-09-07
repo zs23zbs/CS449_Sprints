@@ -38,7 +38,7 @@ window.columnconfigure(2, minsize=800, weight=1)
 
 #Creating the four widgets 
 txt_edit = tk.Text(window)
-frm_buttons = tk.Frame(window, relief = tk.RAISED, bd=2) 
+frm_buttons = tk.Frame(window, relief = tk.RAISED, bd=10) 
 btn_open = tk.Button(frm_buttons, text="Open", command=open_file)
 btn_save = tk.Button(frm_buttons, text="Save as...", command=save_file)
 
