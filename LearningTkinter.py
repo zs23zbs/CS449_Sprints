@@ -1,16 +1,12 @@
-import tkinter as tk 
+import tkinter as tk
 
-window = tk.Tk() 
+window = tk.Tk()
 
-for i in range(3):
-    for j in range(3):
-        frame = tk.Frame(
-            master = window,
-            relief = tk.RAISED,
-            borderwidth = 1
-        )
-        frame.grid(row = i, column = j)
-        label = tk.Label(master=frame, text=f"Row {i}\nColumn {j}")
-        label.pack()
+def handle_keypress(event):
+    """Print the character associated to the key pressed"""
+    print(event.char)
+
+# Bind keypress event to handle_keypress()
+window.bind("<Key>", handle_keypress)
 
 window.mainloop()
