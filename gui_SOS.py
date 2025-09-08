@@ -88,4 +88,10 @@ for i, player in enumerate(bluePlayer_modes):
 bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
 bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
 
+"""S or O Letter Labels"""
+
+"""Which player is playing Labels"""
+
+"""Replay, New Game, Exit Buttons"""
+
 window.mainloop()
