@@ -88,7 +88,7 @@ for i, player in enumerate(bluePlayer_modes):
 bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
 bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
 
-"""S or O Letter Labels"""
+"""S or O Letter widget"""
 # Code below are the red players S and O labels 
 S_O_frame1 = tk.Frame(master=window, bd=5, relief=tk.SUNKEN, bg="#CD5C5C")
 S_O_label1 = tk.Label(master=S_O_frame1, text=" ◯ S \n ◯ O", fg = "black")
@@ -101,8 +101,9 @@ S_O_label2 = tk.Label(master=S_O_frame2, text=" ◯ S \n ◯ O", fg = "black")
 S_O_frame2.grid(row=3, column=6, padx=4, pady=4)
 S_O_label2.grid(row=3, column=6, padx=4, pady=4)
 
-"""Which player is playing Labels"""
-
+"""Which player is playing widgets"""
+whose_turn_frame = tk.Frame(master = window, bd =5, relief =tk.RAISED, bg="#008B8B")
+whose_turn_label = tk.Label(master=whose_turn_frame, text="Whose Turn?: R or B", fg = "black", bg="#E0FFFF")
 
 """Replay, New Game, Exit Buttons"""
 
