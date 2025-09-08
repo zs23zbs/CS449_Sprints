@@ -6,8 +6,8 @@ window.title("SOS TicTacToe")
 
 """Creating TicTacToe Board Display"""
 for i in range(6):
-    window.columnconfigure(7, weight=5, minsize=100)
-    window.rowconfigure(7, weight=5, minsize=100)
+    window.columnconfigure(7, weight=5, minsize=85)
+    window.rowconfigure(7, weight=5, minsize=85)
 
     for j in range(1,6):
         boardGame_frame = tk.Frame(
@@ -22,8 +22,8 @@ for i in range(6):
 """Board Size widget"""
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B")
 boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5x6", fg="black", bg="#E0FFFF")
-boardSize_label.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
-boardSize_frame.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
+boardSize_label.grid(row=0, column=6, padx=5, pady=5)
+boardSize_frame.grid(row=0, column=6, padx=5, pady=5)
 
 """Creating the mode widget"""
 game_modes = ["Simple Game", "General Game"]
