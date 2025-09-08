@@ -20,18 +20,18 @@ for i in range(5):
         boardGame_label.pack(padx=5, pady=5)
 
 """Board Size widget"""
-boardSize_frame = tk.Frame(master=window, bd=3, relief=tk.RAISED, bg="#008B8B")
-boardSize_label = tk.Label(master=boardSize_frame, text=" Board Size: 5", fg="black", bg="#E0FFFF")
+boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B")
+boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5", fg="black", bg="#E0FFFF")
 boardSize_label.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
-boardSize_frame.grid(row=0, column=6, sticky="ne")
+boardSize_frame.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
 
 """Creating the mode widget"""
-mode_frame = tk.Frame(master=window, bd=1, relief=tk.RAISED, bg="#20B2AA")
-mode_label = tk.Label(master=mode_frame, text=f"MODE:", fg="black", bg="#E0FFFF")
 game_modes = ["Simple Game", "General Game"]
+mode_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#20B2AA")
+mode_label = tk.Label(master=mode_frame, text=f"MODE:", fg="black", bg="#E0FFFF")
 
 def pick_mode(): # Fuction for selecting whichever game mode for the radio button
-    mode_label.config(text=f"MODE: {variable1.get()}")
+    mode_label.config(text=f"MODE:")
 variable1 = tk.StringVar(mode_frame, f"{game_modes[0]}")
 
 for i, modes in enumerate(game_modes): # Iterate through the game_modes list to display the different game versions users wants 
@@ -41,18 +41,18 @@ for i, modes in enumerate(game_modes): # Iterate through the game_modes list to 
         variable=variable1,
         value=modes,
         command = pick_mode
-    ).grid(row=i+1, column=0, sticky="ew", padx=4, pady=4)
+    ).grid(row=i+1, column=0,padx=4, pady=4)
 
-mode_label.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
-mode_frame.grid(row=0, column=0, padx=5, pady=5)
+mode_label.grid(row=0, column=0)
+mode_frame.grid(row=0, column=0)
 
 """Red Player Widget"""
-redPlayer_frame = tk.Frame(master=window, bd=2, relief=tk.RAISED, bg="#DC143C")
-redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED PLAYER (R):", fg="black", bg="#E9967A")
 redPlayer_modes = ["Human", "Computer"]
+redPlayer_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#DC143C")
+redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED PLAYER (R):", fg="black", bg="#E9967A")
  
 def pick_playerType1():
-    redPlayer_label.config(text=f"RED PLAYER (R): {variable2.get()}")
+    redPlayer_label.config(text=f"RED PLAYER (R):")
 variable2 = tk.StringVar(redPlayer_frame, f"{redPlayer_modes[0]}")
 
 for i, player in enumerate(redPlayer_modes):
@@ -62,18 +62,18 @@ for i, player in enumerate(redPlayer_modes):
         variable=variable2,
         value=player,
         command = pick_playerType1
-    ).grid(row=i+3, column=0, sticky="ew", padx=4, pady=4)
+    ).grid(row=i+3, column=0, padx=4, pady=4)
 
-redPlayer_label.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
-redPlayer_frame.grid(row=2, column=0, padx=5, pady=5)
+redPlayer_label.grid(row=2, column=0, padx=4, pady=4)
+redPlayer_frame.grid(row=2, column=0, padx=4, pady=4)
 
 """Blue Player Widget"""
-bluePlayer_frame = tk.Frame(master=window, bd=2, relief=tk.RAISED, bg="#0000CD")
+bluePlayer_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#0000CD")
 bluePlayer_label = tk.Label(master=bluePlayer_frame, text=f"BLUE PLAYER (B):", fg="black", bg="#1E90FF")
 bluePlayer_modes = ["Human", "Computer"]
 
 def pick_playerType2():
-    bluePlayer_label.config(text=f"BLUE PLAYER (B): {variable3.get()}")
+    bluePlayer_label.config(text=f"BLUE PLAYER (B):")
 variable3 = tk.StringVar(bluePlayer_frame, f"{bluePlayer_modes[0]}")
 
 for i, player in enumerate(bluePlayer_modes):
@@ -83,9 +83,9 @@ for i, player in enumerate(bluePlayer_modes):
         variable=variable3,
         value=player,
         command = pick_playerType2
-    ).grid(row=i+3, column=6, sticky="ew", padx=4, pady=4)
+    ).grid(row=i+3, column=6, padx=5, pady=5)
 
-bluePlayer_label.grid(row=2, column=6, sticky="ew", padx=5, pady=5)
+bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
 bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
 
 window.mainloop()
