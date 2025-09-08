@@ -1,13 +1,13 @@
 """This wil be the GUI Program for the SOS Game"""
-import tkinter as tk
+import tkinter as tk 
 
 window = tk.Tk()
 window.title("SOS TicTacToe")
 
 """Creating TicTacToe Board Display"""
 for i in range(6):
-    window.columnconfigure(5, weight=5, minsize=100)
-    window.rowconfigure(5, weight=5, minsize=100)
+    window.columnconfigure(7, weight=5, minsize=100)
+    window.rowconfigure(7, weight=5, minsize=100)
 
     for j in range(1,6):
         boardGame_frame = tk.Frame(
@@ -126,5 +126,11 @@ exit_button = tk.Button(master=exit_frame, text="EXIT", height=2, fg="black", bg
 exit_frame.grid(row=6, column=5, padx=4, pady=4)
 exit_button.grid(row=6, column=5, padx=4, pady=4)
 
+"""Record Score Check Box Widget"""
+recordScoreVar=bool()
+recordScore_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+recordScore_CheckbButton = tk.Checkbutton(master=window, text="RECORD SCORE: ", height=1, fg="black", bg="#E0FFFF")
+recordScore_frame.grid(row=4, column=6, padx=4, pady=4)
+recordScore_CheckbButton.grid(row=4, column=6, padx=4, pady=4)
 
 window.mainloop()
