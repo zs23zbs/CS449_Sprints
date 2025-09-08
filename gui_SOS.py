@@ -21,7 +21,7 @@ for i in range(6):
 
 """Board Size widget"""
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B")
-boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5", fg="black", bg="#E0FFFF")
+boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5x6", fg="black", bg="#E0FFFF")
 boardSize_label.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
 boardSize_frame.grid(row=0, column=6, sticky="ne", padx=5, pady=5)
 
@@ -108,5 +108,13 @@ whose_turn_frame.grid(row=4, column=0, padx=4, pady=4)
 whose_turn_label.grid(row=4, column=0, padx=4, pady=4)
 
 """Replay, New Game, Exit Buttons"""
+#Replay Button Widget 
+replay_frame = tk.Frame(master=window, bd =5, relief =tk.RAISED, bg="#008B8B") 
+replay_button = tk.Button(master=replay_frame, text="REPLAY GAME", height=4, fg="black", bg="#E0FFFF")
+replay_frame.grid(row=6, column=1, padx=4, pady=4)
+replay_button.grid(row=6, column=1, padx=4, pady=4)
+
+# New Game Button Widget 
+
 
 window.mainloop()
