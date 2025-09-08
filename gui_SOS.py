@@ -110,11 +110,14 @@ whose_turn_label.grid(row=4, column=0, padx=4, pady=4)
 """Replay, New Game, Exit Buttons"""
 #Replay Button Widget 
 replay_frame = tk.Frame(master=window, bd =5, relief =tk.RAISED, bg="#008B8B") 
-replay_button = tk.Button(master=replay_frame, text="REPLAY GAME", height=4, fg="black", bg="#E0FFFF")
+replay_button = tk.Button(master=replay_frame, text="REPLAY GAME", height=2, fg="black", bg="#E0FFFF")
 replay_frame.grid(row=6, column=1, padx=4, pady=4)
 replay_button.grid(row=6, column=1, padx=4, pady=4)
 
 # New Game Button Widget 
-
+newGame_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+newGame_button = tk.Button(master=newGame_frame, text="NEW GAME", height=2, fg="black", bg="#E0FFFF")
+newGame_frame.grid(row=6, column=3, padx=4, pady=4)
+newGame_button.grid(row=6, column=3, padx=4, pady=4)
 
 window.mainloop()
