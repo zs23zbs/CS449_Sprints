@@ -89,10 +89,15 @@ bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
 bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
 
 """S or O Letter Labels"""
+# Code below are the red players S and O labels 
 S_O_frame1 = tk.Frame(master=window, bd=5, relief=tk.SUNKEN, bg="#CD5C5C")
 S_O_label1 = tk.Label(master=S_O_frame1, text=" ◯ S \n ◯ O", fg = "black")
 S_O_frame1.grid(row=3, column=0, padx=4, pady=4)
 S_O_label1.grid(row=3, column=0, padx=4, pady=4)
+
+# Code below are the blue players S and O labels 
+S_O_frame2 = tk.Frame(master=window, bd=5, relief=tk.SUNKEN, bg="#00FFFF")
+S_O_label2 = tk.Label(master=S_O_frame2, text=" ◯ S \n ◯ O", fg = "black")
 
 """Which player is playing Labels"""
 
