@@ -98,8 +98,11 @@ S_O_label1.grid(row=3, column=0, padx=4, pady=4)
 # Code below are the blue players S and O labels 
 S_O_frame2 = tk.Frame(master=window, bd=5, relief=tk.SUNKEN, bg="#00FFFF")
 S_O_label2 = tk.Label(master=S_O_frame2, text=" ◯ S \n ◯ O", fg = "black")
+S_O_frame2.grid(row=3, column=6, padx=4, pady=4)
+S_O_label2.grid(row=3, column=6, padx=4, pady=4)
 
 """Which player is playing Labels"""
+
 
 """Replay, New Game, Exit Buttons"""
 
