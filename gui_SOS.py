@@ -5,9 +5,9 @@ window = tk.Tk()
 window.title("SOS TicTacToe")
 
 """Creating TicTacToe Board Display"""
-for i in range(5):
-    window.columnconfigure(i, weight=5, minsize=100)
-    window.rowconfigure(i, weight=5, minsize=100)
+for i in range(6):
+    window.columnconfigure(5, weight=5, minsize=100)
+    window.rowconfigure(5, weight=5, minsize=100)
 
     for j in range(1,6):
         boardGame_frame = tk.Frame(
@@ -104,6 +104,8 @@ S_O_label2.grid(row=3, column=6, padx=4, pady=4)
 """Which player is playing widgets"""
 whose_turn_frame = tk.Frame(master = window, bd =5, relief =tk.RAISED, bg="#008B8B")
 whose_turn_label = tk.Label(master=whose_turn_frame, text="Whose Turn?: R or B", fg = "black", bg="#E0FFFF")
+whose_turn_frame.grid(row=4, column=0, padx=4, pady=4)
+whose_turn_label.grid(row=4, column=0, padx=4, pady=4)
 
 """Replay, New Game, Exit Buttons"""
 
