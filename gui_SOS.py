@@ -120,4 +120,11 @@ newGame_button = tk.Button(master=newGame_frame, text="NEW GAME", height=2, fg="
 newGame_frame.grid(row=6, column=3, padx=4, pady=4)
 newGame_button.grid(row=6, column=3, padx=4, pady=4)
 
+# Exit Button Widget
+exit_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+exit_button = tk.Button(master=exit_frame, text="EXIT", height=2, fg="black", bg="#E0FFFF")
+exit_frame.grid(row=6, column=5, padx=4, pady=4)
+exit_button.grid(row=6, column=5, padx=4, pady=4)
+
+
 window.mainloop()
