@@ -25,7 +25,12 @@ for i in range(6):
 
 """Sample SOS line"""
 sample_canvas = tk.Canvas(master=window, width=100, height=100)
-sample_canvas.grid(row=3, column=3, columnspan=3, pady=20)
+sample_canvas.grid(row=3, column=2, columnspan=3, pady=20)
+
+# Draw sample "S O S"
+sample_canvas.create_text(50, 50, text="S",fill="#DC143C")
+sample_canvas.create_text(150, 50, text="O",fill="#0000CD")
+sample_canvas.create_text(250, 50, text="S",fill="#DC143C")
 
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
