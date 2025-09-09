@@ -28,12 +28,12 @@ sample_canvas = tk.Canvas(master=window, width=350, height=100) # Create the dra
 sample_canvas.grid(row=3, column=2, columnspan=3, pady=20)
 
 # Draw sample "S O S" lettering
-sample_canvas.create_text(50, 50, text="S",fill="black")
-sample_canvas.create_text(150, 50, text="O",fill="black")
-sample_canvas.create_text(250, 50, text="S",fill="black")
+sample_canvas.create_text(60, 50, text="S",fill="black")
+sample_canvas.create_text(170, 50, text="O",fill="black")
+sample_canvas.create_text(300, 50, text="S",fill="black")
 
 # Strike through line to indicate creating "S O S"
-sample_canvas.create_line(20, 50, 280, 50, fill="#DC143C", width=3) # Sample, red player scores a point
+sample_canvas.create_line(20, 50, 340, 50, fill="#DC143C", width=3) # Sample, red player scores a point
 
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
@@ -86,9 +86,9 @@ redPlayer_label.grid(row=2, column=0, padx=4, pady=4)
 redPlayer_frame.grid(row=2, column=0, padx=4, pady=4)
 
 """Blue Player Widget"""
+bluePlayer_modes = ["Human", "Computer"]
 bluePlayer_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#0000CD")
 bluePlayer_label = tk.Label(master=bluePlayer_frame, text=f"BLUE PLAYER (B):", fg="black", bg="#1E90FF")
-bluePlayer_modes = ["Human", "Computer"]
 
 def pick_playerType2():
     bluePlayer_label.config(text=f"BLUE PLAYER (B):")
