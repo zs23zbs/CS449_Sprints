@@ -1,32 +1,42 @@
 """This wil be the GUI Program for the SOS Game"""
 import tkinter as tk 
+from tkinter import *
 
 window = tk.Tk()
 window.title("SOS TicTacToe")
 
 """Creating TicTacToe Board Display"""
 for i in range(6):
+    # Creating a responsive window for user
     window.columnconfigure(7, weight=5, minsize=85)
     window.rowconfigure(7, weight=5, minsize=85)
 
+    # Creating the loop for each block of the board for TicTacToe 
     for j in range(1,6):
-        boardGame_frame = tk.Frame(
+        boardGame_frame = tk.Frame( # Framing the boardGame widget helps in controlling layout of said widget 
             master=window,
             relief= tk.SUNKEN,
             bd=5,
         )
+        # Displaying and formatting the board game display 
         boardGame_frame.grid(row=i, column=j,padx=5, pady=5)
-        boardGame_label = tk.Label(master=boardGame_frame, width=8, height=5, text="", bg="lightblue")
+        boardGame_label = tk.Label(master=boardGame_frame, width=8, height=5, text="", bg="lightblue") # For displaying text
         boardGame_label.pack(padx=5, pady=5)
 
-"""Board Size widget"""
-boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B")
+"""Sample SOS line"""
+sample_canvas = tk.Canvas(master=window, width=100, height=100)
+sample_canvas.grid(row=3, column=3, columnspan=3, pady=20)
+
+"""Board Size widget""" 
+boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
 boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5x6", fg="black", bg="#E0FFFF")
+
+# Format the board size widget 
 boardSize_label.grid(row=0, column=6, padx=5, pady=5)
 boardSize_frame.grid(row=0, column=6, padx=5, pady=5)
 
 """Creating the mode widget"""
-game_modes = ["Simple Game", "General Game"]
+game_modes = ["Simple Game", "General Game"] # List of options for user to pick for game mode
 mode_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#20B2AA")
 mode_label = tk.Label(master=mode_frame, text=f"MODE:", fg="black", bg="#E0FFFF")
 
@@ -34,7 +44,7 @@ def pick_mode(): # Fuction for selecting whichever game mode for the radio butto
     mode_label.config(text=f"MODE:")
 variable1 = tk.StringVar(mode_frame, f"{game_modes[0]}")
 
-for i, modes in enumerate(game_modes): # Iterate through the game_modes list to display the different game versions users wants 
+for i, modes in enumerate(game_modes): # Iterate through the game_modes list to display the different game versions the user may want to play in 
     tk.Radiobutton(
         master=mode_frame,
         text=modes,
@@ -127,7 +137,7 @@ exit_frame.grid(row=6, column=5, padx=4, pady=4)
 exit_button.grid(row=6, column=5, padx=4, pady=4)
 
 """Record Score Check Box Widget"""
-recordScoreVar=bool()
+recordScoreVar=bool() # To set the state of the checkbox button, check (TRUE) or uncheck (FALSE)
 recordScore_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
 recordScore_CheckbButton = tk.Checkbutton(master=window, text="RECORD SCORE: ", height=1, fg="black", bg="#E0FFFF")
 recordScore_frame.grid(row=4, column=6, padx=4, pady=4)
