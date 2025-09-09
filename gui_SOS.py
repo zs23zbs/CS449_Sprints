@@ -1,7 +1,7 @@
-"""This wil be the GUI Program for the SOS Game"""
 import tkinter as tk 
-from tkinter import *
+from tkinter import * # Specifically for the Canvas object 
 
+"""Initiate and create window with title"""
 window = tk.Tk()
 window.title("SOS TicTacToe")
 
@@ -24,16 +24,16 @@ for i in range(6):
         boardGame_label.pack(padx=5, pady=5)
 
 """Sample SOS line"""
-sample_canvas = tk.Canvas(master=window, width=300, height=100)
+sample_canvas = tk.Canvas(master=window, width=350, height=100) # Create the drawing canvas for strike through line 
 sample_canvas.grid(row=3, column=2, columnspan=3, pady=20)
 
-# Draw sample "S O S"
-sample_canvas.create_text(50, 50, text="S",fill="#DC143C")
-sample_canvas.create_text(150, 50, text="O",fill="#0000CD")
-sample_canvas.create_text(250, 50, text="S",fill="#DC143C")
+# Draw sample "S O S" lettering
+sample_canvas.create_text(50, 50, text="S",fill="black")
+sample_canvas.create_text(150, 50, text="O",fill="black")
+sample_canvas.create_text(250, 50, text="S",fill="black")
 
 # Strike through line to indicate creating "S O S"
-sample_canvas.create_line(20, 50, 280, 50, fill="black", width=3)
+sample_canvas.create_line(20, 50, 280, 50, fill="#DC143C", width=3) # Sample, red player scores a point
 
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
@@ -44,7 +44,7 @@ boardSize_label.grid(row=0, column=6, padx=5, pady=5)
 boardSize_frame.grid(row=0, column=6, padx=5, pady=5)
 
 """Creating the mode widget"""
-game_modes = ["Simple Game", "General Game"] # List of options for user to pick for game mode
+game_modes = ["Simple Game", "General Game"] # List of options for user to pick for game mode / creating a radio button
 mode_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#20B2AA")
 mode_label = tk.Label(master=mode_frame, text=f"MODE:", fg="black", bg="#E0FFFF")
 
@@ -73,7 +73,7 @@ def pick_playerType1():
     redPlayer_label.config(text=f"RED PLAYER (R):")
 variable2 = tk.StringVar(redPlayer_frame, f"{redPlayer_modes[0]}")
 
-for i, player in enumerate(redPlayer_modes):
+for i, player in enumerate(redPlayer_modes): # Loop/iterate through all items in list 
     tk.Radiobutton(
         master=redPlayer_frame,
         text=player,
