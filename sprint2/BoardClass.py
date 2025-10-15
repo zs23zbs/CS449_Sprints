@@ -1,4 +1,5 @@
 """Board Class"""
 
 class Board:
-    pass 
+    def __init__(self): # Need to add more 
+        pass
