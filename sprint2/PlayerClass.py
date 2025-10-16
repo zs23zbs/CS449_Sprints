@@ -17,6 +17,6 @@ class Player:
 
         return self.letter_choice
     
-    def __str__(self): # Just to help with debugging 
+    def __str__(self): # Just to help with debugging, prints out when passing through the class 
         return f"{self.color} player placing {self.letter_choice}"
 
