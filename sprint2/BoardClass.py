@@ -6,5 +6,13 @@
 
 class Board:
     def __init__(self, board_size): 
-        self.board_size = board_size 
+        self.board_size = board_size
+
+        game_board = []
+        for i in range(board_size):
+            row = []
+            for j in range(board_size):
+                row.append(None)
+            game_board.append(row)
+
         #Supposed to create a board with input given size and fill it with nothing
