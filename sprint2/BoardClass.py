@@ -17,14 +17,23 @@ class Board:
             self.game_board.append(row)
     
     def is_cell_empty(self, row, col): 
-        # Before player makes a move, system check if it is empty 
+        # Before player makes a move on cell, system checks if it is empty 
         if self.game_board[row][col] == None:
             return True
         else:
             return False
 
     def place(self, row, col, letter, color): 
-        pass
+        # Updates the cell whichever player chooses to make a move
+        if row not in range(0, self.board_size) or col in range(0, self.board_size):
+            return False
+        
+        if not self.is_cell_empty(row, col): 
+            return False
+        
+        self.game_board[row][col] = letter
+
+        return True 
 
     def reset(self):
         pass
