@@ -25,7 +25,7 @@ class Board:
 
     def place(self, row, col, letter, color): 
         # Updates the cell whichever player chooses to make a move
-        if row not in range(0, self.board_size) or col in range(0, self.board_size):
+        if row not in range(0, self.board_size) or col not in range(0, self.board_size):
             return False
         
         if not self.is_cell_empty(row, col): 
@@ -35,8 +35,15 @@ class Board:
 
         return True 
 
-    def reset(self):
-        pass
+    def reset(self): #Reset the the board, all cells are empty once more
+        
+        self.game_board = []
+        for i in range(self.board_size): 
+            row = []
+            for j in range(self.board_size):
+                row.append(None)
+            self.game_board.append(row)
+        
 
     def __str__(self): #Just to be able to see the board itself
         return f"{self.game_board}" 
