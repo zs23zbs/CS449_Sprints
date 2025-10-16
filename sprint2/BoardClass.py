@@ -6,13 +6,29 @@
 
 class Board:
     def __init__(self, board_size): 
+        # Initilizes a  2d nested list board with the input board size by user 
         self.board_size = board_size
+        
 
-        game_board = []
-        for i in range(board_size):
+        self.game_board = []
+        for i in range(board_size): 
             row = []
             for j in range(board_size):
                 row.append(None)
-            game_board.append(row)
+            self.game_board.append(row)
+    
+    def is_cell_empty(self, row, col):
+        pass
 
-        #Supposed to create a board with input given size and fill it with nothing
+    def place(self, row, col, letter, color): 
+        pass
+
+    def reset(self):
+        pass
+
+    def __str__(self):
+        return f"{self.game_board}" 
+
+new_game_board = Board(3)
+
+print(new_game_board.game_board)
