@@ -1,8 +1,7 @@
 """Board Class"""
 # Represents the grid (2d list of cells)
 # Keep track of what is in the ceels (S or O, or empty) 
-# Ensure valid moves 
-# Is a provided helper funtion for logic and GUI 
+# Ensure valid moves
 
 class Board:
     def __init__(self, board_size): 
@@ -36,18 +35,10 @@ class Board:
         return True 
 
     def reset(self): #Reset the the board, all cells are empty once more
-        
+
         self.game_board = []
         for i in range(self.board_size): 
             row = []
             for j in range(self.board_size):
                 row.append(None)
             self.game_board.append(row)
-        
-
-    def __str__(self): #Just to be able to see the board itself
-        return f"{self.game_board}" 
-
-new_game_board = Board(3)
-
-print(new_game_board.game_board)
