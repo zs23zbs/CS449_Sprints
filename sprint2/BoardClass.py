@@ -4,7 +4,7 @@
 # Ensure valid moves
 
 class Board:
-    def __init__(self, board_size): 
+    def __init__(self, board_size): #===Works!===
         # Initializes a  2d nested list board with the input board size by user 
         self.board_size = board_size
         
@@ -15,14 +15,14 @@ class Board:
                 row.append(None)
             self.game_board.append(row)
     
-    def is_cell_empty(self, row, col): 
+    def is_cell_empty(self, row, col):  #===Works!===
         # Before player makes a move on cell, system checks if it is empty 
         if self.game_board[row][col] == None:
             return True
         else:
             return False
 
-    def place(self, row, col, letter, color): 
+    def place(self, row, col, letter, color): #===Works!===
         # Updates the cell whichever player chooses to make a move
         if row not in range(0, self.board_size) or col not in range(0, self.board_size):
             return False
@@ -30,12 +30,12 @@ class Board:
         if not self.is_cell_empty(row, col): 
             return False
         
-        self.game_board[row][col] = letter
+        self.game_board[row][col] = letter, color 
 
         return True 
 
-    def reset(self): #Reset the the board, all cells are empty once more
-
+    def reset(self): #===Check===
+        #Reset the the board, all cells are empty once more
         self.game_board = []
         for i in range(self.board_size): 
             row = []
