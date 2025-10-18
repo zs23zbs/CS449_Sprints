@@ -20,7 +20,7 @@ class GameLogic:
 
     def make_move(self, row, col): # Very unsure about method 
         if self.board.is_cell_empty(row, col):
-            self.board_game.place(row, col, self.current_turn.letter_choice, self.current_turn.color)
+            self.board.place(row, col, self.current_turn.letter_choice, self.current_turn.color)
             self.switch_turn()
             return True 
         else: #Move is invalid if the cell is occupied 
