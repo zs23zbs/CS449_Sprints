@@ -26,10 +26,12 @@ class GameLogic:
         else: #Move is invalid if the cell is occupied 
             return False
         
-    def switch_turn(self):
-        if self.current_turn == self.player_blue:
+    def switch_turn(self): # Switch the current player turn to the opposing player
+        if self.current_turn == self.player_blue: 
             self.current_turn = self.player_red
         else:
             self.current_turn = self.player_blue
 
-    
+    def reset(self):
+        self.board.reset()
+        self.current_turn = self.player_blue
