@@ -1,7 +1,7 @@
 import pytest 
 from game_logic import GameLogic
 
-"""AI Generated Automated Tests"""
+"""AI Generated Automated Tests""" # Make sure, correlate to acceptance criteria and user stories from sprint #1 
 def test_make_move_and_switch_turn(): 
     game = GameLogic(3, "Simple")
 
@@ -21,3 +21,6 @@ def test_invalid_move_doesnt_change_turn():
 
     assert move_is_successful is False
     assert game.current_turn.color == previous_turn
+
+"""Need to make more, keep in mind for making notes on Sprint #2 Report"""
+# Note, make sure the terminal is in same directory as "sprint2" using cd and ls
