@@ -40,4 +40,46 @@ for i, modes in enumerate(game_modes): # Iterate through the game_modes list to 
 mode_label.grid(row=0, column=0)
 mode_frame.grid(row=0, column=0)
 
+"""Red Player Widget"""
+redPlayer_modes = ["Human", "Computer"]
+redPlayer_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#DC143C")
+redPlayer_label = tk.Label(master=redPlayer_frame, text=f"RED PLAYER (R):", fg="black", bg="#E9967A")
+ 
+def pick_playerType1():
+    redPlayer_label.config(text=f"RED PLAYER (R):")
+variable2 = tk.StringVar(redPlayer_frame, f"{redPlayer_modes[0]}")
+
+for i, player in enumerate(redPlayer_modes): # Loop/iterate through all items in list 
+    tk.Radiobutton(
+        master=redPlayer_frame,
+        text=player,
+        variable=variable2,
+        value=player,
+        command = pick_playerType1
+    ).grid(row=i+3, column=0, padx=4, pady=4)
+
+redPlayer_label.grid(row=2, column=0, padx=4, pady=4)
+redPlayer_frame.grid(row=2, column=0, padx=4, pady=4)
+
+"""Blue Player Widget"""
+bluePlayer_modes = ["Human", "Computer"]
+bluePlayer_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#0000CD")
+bluePlayer_label = tk.Label(master=bluePlayer_frame, text=f"BLUE PLAYER (B):", fg="black", bg="#1E90FF")
+
+def pick_playerType2():
+    bluePlayer_label.config(text=f"BLUE PLAYER (B):")
+variable3 = tk.StringVar(bluePlayer_frame, f"{bluePlayer_modes[0]}")
+
+for i, player in enumerate(bluePlayer_modes):
+    tk.Radiobutton(
+        master=bluePlayer_frame,
+        text=player,
+        variable=variable3,
+        value=player,
+        command = pick_playerType2
+    ).grid(row=i+3, column=6, padx=5, pady=5)
+
+bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
+bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
+
 window.mainloop()
