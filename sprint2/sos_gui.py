@@ -11,6 +11,39 @@ board_buttons = []
 board_size = tk.IntVar(value=3)
 mode = tk.StringVar(value="Simple Game")
 
+def handle_clicks(row, col):
+    if game is None: 
+        return 
+    
+    if game.make_move(row,col):
+        current_player = game.current_turn
+        letter = current_player.letter_choice
+        color = current_player.color 
+
+        board_buttons[row][col].config(text=letter, bg=color.lower())
+
+def create_board(size):
+    global board_buttons
+
+    # Create the frame for the board
+    board_frame = tk.Frame(master=window, bg="lightblue")
+    board_frame.grid(row=1, column=1, columnspan=5, rowspan=5, padx=10, pady=10)
+
+    for i in range(size):
+        row_buttons = []
+        for j in range(size):
+            btn = tk.Button(
+                master=board_frame,
+                text="",
+                width=8,
+                height=4,
+                bg="white",
+                command=lambda r=i, c=j: handle_clicks(r,c)
+            )
+            btn.grid(row=i, column=j, padx=2, pady=2)
+            row_buttons.append(btn)
+        board_buttons.append(row_buttons)
+
 def start_game():
     global game, board_buttons
 
@@ -19,8 +52,13 @@ def start_game():
             button.destroy()
     board_buttons = [] 
 
+    # Get board size and mode from user inputs
     size = board_size.get()
     current_mode = mode.get()
+
+    # Make new dynamic board
+    create_board(size)
+
 
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
