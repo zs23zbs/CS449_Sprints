@@ -32,5 +32,11 @@ class SOSGame():
         tk.Spinbox(board_frame, from_=3, to=10, textvariable=self.board_size, width=5).grid(row=0, column=1, padx=5, pady=5)
         board_frame.grid(row=1, column=0, columnspan=2, pady=5)
 
+        # Game Mode button
+        mode_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#20B2AA")
+        tk.Label(mode_frame, text="Game Mode:", bg="#FFFAFA", fg="black").grid(row=0,column=0, padx=5,pady=5)
+        tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
+        mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
+
 if __name__ == "__main__":
     SOSGame()
