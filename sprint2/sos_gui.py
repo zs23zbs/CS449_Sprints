@@ -45,14 +45,23 @@ class SOSGame():
             tk.Radiobutton(red_frame, text=letter, variable=self.red_letter, value=letter, command=self.update_opponent_letter, bg="#E9967A").grid(row=3, column=0, columnspan=2, pady=5)
         red_frame.grid(row=3, column=0, columnspan=2, pady=5)
 
+        # Start button 
+        start_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#008B8B")
+        tk.Button(start_frame, text="Start Game", height=2, fg="black", bg="#FFFAFA", command=self.start_game).grid(row=0, column=0, padx=10, pady=10)
+        start_frame.grid(row=4, column=0, columnspan=2, pady=10)
+
     def update_opponent_letter(self):
         """Automatically assign the opponent the other label based on user letter choice"""
         self.blue_letter.set("O" if self.red_letter.get() == "S" else "S")
 
-        # Start button 
-        start_frame = tk.Frame(self.start_menu, bd=5, relif=tk.RAISED, bg="#008B8B")
-        tk.Button(start_frame, text="Start Game", height=2, fg="black", bg="#FFFAFA", command=self.start_game).grid(row=0, column=0, padx=10, pady=10)
-        start_frame.grid(row=4, column=0, columnspan=2, pady=10)
+    def start_game(self):
+        """Closes the start menu and open the window for game"""
+        self.start_menu.destroy()
+
+        self.game_window = tk.Tk()
+        self.game_window.title("SOS Game")
+        self.game_window.config(bg="#008B8B")
+
 
 if __name__ == "__main__":
     SOSGame()
