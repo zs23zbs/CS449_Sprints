@@ -92,6 +92,12 @@ class SOSGame():
         self.turn_label.pack(padx=5, pady=5)
         turn_frame.pack(pady=10)
 
+        # Mode Label 
+        mode_frame = tk.Frame(self.game_window, bd=3, relief=tk.RIDGE, bg="#008B8B")
+        self.mode_label = tk.Label(mode_frame, text=f"Game Mode: {self.mode.get()}", font=("Helvetica", 14, "bold"), bg="#E0FFFF",fg="black")
+        self.mode_label.pack(padx=5, pady=3)
+        mode_frame.pack(pady=5)
+
         # Player information (Red Player)
         info_frame = tk.Frame(self.game_window, bg="#008B8B")
 
