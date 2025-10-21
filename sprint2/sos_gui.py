@@ -65,14 +65,14 @@ class SOSGame():
         self.game_window.config(bg="#008B8B")
 
         self.game = GameLogic(self.board_size.get(), self.mode.get())
-        self.game.pkayer_red.letter_choice = self.red_letter.get()
+        self.game.player_red.letter_choice = self.red_letter.get()
         self.game.player_blue.letter_choice = self.blue_letter.get()
 
         self.board_buttons = []
 
         self.create_game_widgets()
-        #self.create_board(self.board_size.get())
-        #self.update_turn_display()
+        self.create_board(self.board_size.get())
+        self.update_turn_display()
 
         self.game_window.mainloop()
     
@@ -90,7 +90,7 @@ class SOSGame():
         red_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#DC143C")
         self.red_label = tk.Label(red_frame, text="", bg="#E9967A", fg="black", font=("Helvetica", 16, "bold"))
         self.red_label.pack(padx=10, pady=5)
-        self.red_frame.grid(row=0, column=0, padx=10)
+        red_frame.grid(row=0, column=0, padx=10)
 
         # Player information (Blue Player)
         blue_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#0000CD")
@@ -109,7 +109,7 @@ class SOSGame():
 
         tk.Button(button_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid(row=0, column=1, padx=4, pady=4)
 
-        tk.Button(button_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.destroy_game_window).grid(row=0, column=2, padx=4, pady=4)
+        tk.Button(button_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_window.destroy).grid(row=0, column=2, padx=4, pady=4)
 
         button_frame.pack(pady=10)
     
@@ -138,7 +138,7 @@ class SOSGame():
         if not self.game:
             return 
         
-        current_player = self.game_.current_turn
+        current_player = self.game.current_turn
         letter = current_player.letter_choice 
 
         if self.game.make_move(row, col):
