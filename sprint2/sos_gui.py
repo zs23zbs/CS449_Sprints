@@ -38,7 +38,7 @@ class SOSGame():
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
 
-        # Red Player button
+        # Red Player button ==> Consider to modify  
         red_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#DC143C")
         tk.Label(red_frame, text="Red Player Letter:", bg="#E9967A", fg="black").grid(row=0, column=0, padx=5, pady=5)
         for i, letter in enumerate(["S", "O"]):
@@ -68,7 +68,7 @@ class SOSGame():
 
         self.board_buttons = []
 
-        # self.create_game_widgets()
+        self.create_game_widgets()
         #self.create_board(self.board_size.get())
         #self.update_turn_display()
 
@@ -95,6 +95,17 @@ class SOSGame():
         self.blue_label = tk.Label(blue_frame, text="", bg="#1E90FF", fg="black", font=("Helvetica", 16, "bold"))
         blue_frame.grid(row=0, column=1, padx=10)
         info_frame.pack(pady=10)
+
+        # Place the board game cells 
+        self.board_frame = tk.Frame(self.game_window, bg="lightblue", bd=5, relief=tk.RAISED)
+        self.board_frame.pack(padx=20, pady=10)
+
+        # Buttons at the bottom (reset, new, and exit game)
+        button_frame = tk.Frame(self.game_window, bd=5, relief=tk.RAISED, bg="#008B8B")
+
+        tk.Button(button_frame, text="REPLAY GAME", height=2, bg="#FFFAFA", command=self.reset_game).grid(row=0, column=0, padx=4, pady=4)
+
+        tk.Button(button_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid()
 
 if __name__ == "__main__":
     SOSGame()
