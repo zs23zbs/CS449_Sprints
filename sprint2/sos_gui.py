@@ -7,7 +7,7 @@ class SOSGame():
 
         # Create start_menu instances
         self.start_menu = tk.Tk()
-        self.start_menu.title("TicTacToe SOS Start Menu")
+        self.start_menu.title("SOS Start Menu")
         self.start_menu.config(bg="#008B8B")
 
         # Variables for start menu
@@ -37,6 +37,13 @@ class SOSGame():
         tk.Label(mode_frame, text="Game Mode:", bg="#FFFAFA", fg="black").grid(row=0,column=0, padx=5,pady=5)
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
+
+        # Red Player selection button
+        red_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#DC143C")
+        tk.Label(red_frame, text="Red Player Letter:", bg="#E9967A", fg="black").grid(row=0, column=0, padx=5, pady=5)
+        for i, letter in enumerate(["S", "O"]):
+            tk.Radiobutton(red_frame, text=letter, variable=self.red_letter, value=letter, command=self.update_opponent_letter, bg="#E9967A").grid(row=3, column=0, columnspan=2, pady=5)
+        red_frame.grid(row=3, column=0, columnspan=2, pady=5)
 
 if __name__ == "__main__":
     SOSGame()
