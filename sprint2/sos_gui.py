@@ -13,7 +13,7 @@ mode = tk.StringVar(value="Simple Game")
 
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
-boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: 5x6", fg="black", bg="#E0FFFF")
+boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: ", fg="black", bg="#E0FFFF")
 
 # Format the board size widget 
 boardSize_label.grid(row=0, column=6, padx=5, pady=5)
@@ -81,5 +81,40 @@ for i, player in enumerate(bluePlayer_modes):
 
 bluePlayer_label.grid(row=2, column=6, padx=5, pady=5)
 bluePlayer_frame.grid(row=2, column=6, padx=5, pady=5)
+
+"""Sample SOS line"""
+sample_canvas = tk.Canvas(master=window, width=350, height=100) # Create the drawing canvas for strike through line 
+sample_canvas.grid(row=3, column=2, columnspan=3, pady=20)
+
+# Draw sample "S O S" lettering
+sample_canvas.create_text(60, 50, text="S",fill="black")
+sample_canvas.create_text(170, 50, text="O",fill="black")
+sample_canvas.create_text(300, 50, text="S",fill="black")
+
+"""Replay, New Game, Exit Buttons"""
+#Replay Button Widget 
+replay_frame = tk.Frame(master=window, bd =5, relief =tk.RAISED, bg="#008B8B") 
+replay_button = tk.Button(master=replay_frame, text="REPLAY GAME", height=2, fg="black", bg="#E0FFFF")
+replay_frame.grid(row=6, column=1, padx=4, pady=4)
+replay_button.grid(row=6, column=1, padx=4, pady=4)
+
+# New Game Button Widget 
+newGame_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+newGame_button = tk.Button(master=newGame_frame, text="NEW GAME", height=2, fg="black", bg="#E0FFFF")
+newGame_frame.grid(row=6, column=3, padx=4, pady=4)
+newGame_button.grid(row=6, column=3, padx=4, pady=4)
+
+# Exit Button Widget
+exit_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+exit_button = tk.Button(master=exit_frame, text="EXIT", height=2, fg="black", bg="#E0FFFF")
+exit_frame.grid(row=6, column=5, padx=4, pady=4)
+exit_button.grid(row=6, column=5, padx=4, pady=4)
+
+"""Record Score Check Box Widget"""
+recordScoreVar=bool() # To set the state of the checkbox button, check (TRUE) or uncheck (FALSE)
+recordScore_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
+recordScore_CheckbButton = tk.Checkbutton(master=window, text="RECORD SCORE: ", height=1, fg="black", bg="#E0FFFF")
+recordScore_frame.grid(row=4, column=6, padx=4, pady=4)
+recordScore_CheckbButton.grid(row=4, column=6, padx=4, pady=4)
 
 window.mainloop()
