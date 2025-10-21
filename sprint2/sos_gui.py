@@ -180,5 +180,5 @@ class SOSGame():
         self.game_window.destroy()
         SOSGame()
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     SOSGame()
