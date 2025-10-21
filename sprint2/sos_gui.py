@@ -129,6 +129,9 @@ class SOSGame():
                 btn.grid(row=i, column=j, padx=3, pady=3)
                 row_buttons.append(btn)
             self.board_buttons.append(row_buttons)
+    
+    def handle_click(self, row, col):
+        pass
 
 if __name__ == "__main__":
     SOSGame()
