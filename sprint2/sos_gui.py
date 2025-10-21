@@ -83,5 +83,18 @@ class SOSGame():
         self.turn_label.pack(padx=5, pady=5)
         turn_frame.pack(pady=10)
 
+        # Player information (Red Player)
+        info_frame = tk.Frame(self.game_window, bg="#008B8B")
+        red_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#DC143C")
+        self.red_label = tk.Label(red_frame, text="", bg="#E9967A", fg="black", font=("Helvetica", 16, "bold"))
+        self.red_label.pack(padx=10, pady=5)
+        self.red_frame.grid(row=0, column=0, padx=10)
+
+        # Player information (Blue Player)
+        blue_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#0000CD")
+        self.blue_label = tk.Label(blue_frame, text="", bg="#1E90FF", fg="black", font=("Helvetica", 16, "bold"))
+        blue_frame.grid(row=0, column=1, padx=10)
+        info_frame.pack(pady=10)
+
 if __name__ == "__main__":
     SOSGame()
