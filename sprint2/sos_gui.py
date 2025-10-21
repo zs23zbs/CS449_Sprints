@@ -61,6 +61,7 @@ class SOSGame():
     def update_opponent_letter(self):
         """Automatically assign the opponent the other label based on user letter choice"""
         self.blue_letter.set("O" if self.red_letter.get() == "S" else "S")
+        self.red_letter.set("S" if self.blue_letter.get() == "O" else "O")
 
     def start_game(self):
         """Closes the start menu and open the window for game"""
@@ -93,6 +94,7 @@ class SOSGame():
 
         # Player information (Red Player)
         info_frame = tk.Frame(self.game_window, bg="#008B8B")
+
         red_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#DC143C")
         self.red_label = tk.Label(red_frame, text="", bg="#E9967A", fg="black", font=("Helvetica", 16, "bold"))
         self.red_label.pack(padx=10, pady=5)
@@ -101,7 +103,9 @@ class SOSGame():
         # Player information (Blue Player)
         blue_frame = tk.Frame(info_frame, bd=5, relief=tk.RAISED, bg="#0000CD")
         self.blue_label = tk.Label(blue_frame, text="", bg="#1E90FF", fg="black", font=("Helvetica", 16, "bold"))
+        self.blue_label.pack(padx=10, pady=5)
         blue_frame.grid(row=0, column=1, padx=10)
+
         info_frame.pack(pady=10)
 
         # Place the board game cells 
