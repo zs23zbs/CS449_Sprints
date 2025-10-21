@@ -11,6 +11,17 @@ board_buttons = []
 board_size = tk.IntVar(value=3)
 mode = tk.StringVar(value="Simple Game")
 
+def start_game():
+    global game, board_buttons
+
+    for row in board_buttons:
+        for button in row:
+            button.destroy()
+    board_buttons = [] 
+
+    size = board_size.get()
+    current_mode = mode.get()
+
 """Board Size widget""" 
 boardSize_frame = tk.Frame(master=window, bd=5, relief=tk.RAISED, bg="#008B8B") 
 boardSize_label = tk.Label(master=boardSize_frame, text="Game Board Size: ", fg="black", bg="#E0FFFF")
@@ -100,7 +111,15 @@ replay_button.grid(row=6, column=1, padx=4, pady=4)
 
 # New Game Button Widget 
 newGame_frame = tk.Frame(master=window, bd=5, relief =tk.RAISED, bg="#008B8B")
-newGame_button = tk.Button(master=newGame_frame, text="NEW GAME", height=2, fg="black", bg="#E0FFFF")
+
+newGame_button = tk.Button(
+    master=newGame_frame,
+    text="NEW GAME",
+    height=2,
+    fg="black",
+    bg="#E0FFFF",
+    command=lambda: start_game())
+
 newGame_frame.grid(row=6, column=3, padx=4, pady=4)
 newGame_button.grid(row=6, column=3, padx=4, pady=4)
 
