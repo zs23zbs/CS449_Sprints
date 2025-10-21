@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from game_logic import GameLogic
 
-
 class SOSGame(): 
     def __init__(self):
         """Creating the start menu for user to interact to initiate game"""
@@ -15,8 +14,8 @@ class SOSGame():
         # Variables for start menu
         self.board_size = tk.IntVar(value=3)
         self.mode = tk.StringVar(value="Simple Game")
-        self.red_letter = tk.StringVar(value="O")
-        self.blue_letter = tk.StringVar(value="S")
+        self.red_letter = tk.StringVar(value="S")
+        self.blue_letter = tk.StringVar(value="O")
 
         self.create_start_menu()
         self.start_menu.mainloop()
@@ -40,17 +39,24 @@ class SOSGame():
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
 
-        # Red Player button ==> Consider to modify  
+        # Red Player button  
         red_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#DC143C")
         tk.Label(red_frame, text="Red Player Letter:", bg="#E9967A", fg="black").grid(row=0, column=0, padx=5, pady=5)
         for i, letter in enumerate(["S", "O"]):
             tk.Radiobutton(red_frame, text=letter, variable=self.red_letter, value=letter, command=self.update_opponent_letter, bg="#E9967A").grid(row=0, column=i+1, padx=5, pady=5)
         red_frame.grid(row=3, column=0, columnspan=2, pady=5)
 
+        # Blue Player button
+        blue_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#0000CD")
+        tk.Label(blue_frame, text="Blue Player Letter:",  bg="#1E90FF", fg="black").grid(row=0, column=0, padx=5, pady=5)
+        for i, letter in enumerate(["S", "O"]):
+            tk.Radiobutton(blue_frame, text=letter, variable=self.blue_letter, value=letter, command=self.update_opponent_letter, bg="#E9967A").grid(row=0, column=i+1, padx=5, pady=5)
+        blue_frame.grid(row=4, column=0, columnspan=2, pady=5)
+
         # Start button 
         start_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#008B8B")
         tk.Button(start_frame, text="Start Game", height=2, fg="black", bg="#FFFAFA", command=self.start_game).grid(row=0, column=0, padx=10, pady=10)
-        start_frame.grid(row=4, column=0, columnspan=2, pady=10)
+        start_frame.grid(row=5, column=0, columnspan=2, pady=10)
 
     def update_opponent_letter(self):
         """Automatically assign the opponent the other label based on user letter choice"""
