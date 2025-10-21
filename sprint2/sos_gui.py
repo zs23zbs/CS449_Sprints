@@ -38,7 +38,7 @@ class SOSGame():
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
 
-        # Red Player selection button
+        # Red Player button
         red_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RAISED, bg="#DC143C")
         tk.Label(red_frame, text="Red Player Letter:", bg="#E9967A", fg="black").grid(row=0, column=0, padx=5, pady=5)
         for i, letter in enumerate(["S", "O"]):
@@ -62,6 +62,17 @@ class SOSGame():
         self.game_window.title("SOS Game")
         self.game_window.config(bg="#008B8B")
 
+        self.game = GameLogic(self.board_size.get(), self.mode.get())
+        self.game.pkayer_red.letter_choice = self.red_letter.get()
+        self.game.player_blue.letter_choice = self.blue_letter.get()
+
+        self.board_buttons = []
+
+        # self.create_game_widgets()
+        #self.create_board(self.board_size.get())
+        #self.update_turn_display()
+
+        self.game_window.mainloop()
 
 if __name__ == "__main__":
     SOSGame()
