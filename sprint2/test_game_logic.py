@@ -1,6 +1,6 @@
 import pytest 
 from game_logic import GameLogic
-from sprint2.board_class import Board
+from board_class import Board
 
 """AI Generated Automated Tests (2)""" 
 def test_make_move_and_switch_turn(): 

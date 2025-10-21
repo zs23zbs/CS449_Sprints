@@ -1,5 +1,3 @@
-"""Player Class"""
-
 class Player:
     def __init__(self, color, letter_choice="S"):
         """Initialize Player objects
