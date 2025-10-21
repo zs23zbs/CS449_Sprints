@@ -155,5 +155,20 @@ class SOSGame():
         self.red_label.config(text=f"RED PLAYER (R): {self.game.player_red.letter_choice}")
         self.blue_label.config(text=f"BLUE PLAYER (B): {self.game.player_blue.letter_choice}")
 
+    def reset_game(self):
+        """reset the game"""
+
+        if self.game:
+            self.game.reset()
+        for row in self.board_buttons:
+            for btn in row:
+                btn.config(text="", bg="white")
+        self.update_turn_display()
+
+    def start_game_from_setup(self):
+        """Return to the start menu"""
+        self.game_window.destroy()
+        SOSGame()
+
 if __name__ == "__main__":
     SOSGame()
