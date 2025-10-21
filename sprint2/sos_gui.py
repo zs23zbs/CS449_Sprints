@@ -1,5 +1,7 @@
 import tkinter as tk
+from tkinter import messagebox
 from game_logic import GameLogic
+
 
 class SOSGame(): 
     def __init__(self):
@@ -131,6 +133,21 @@ class SOSGame():
             self.board_buttons.append(row_buttons)
     
     def handle_click(self, row, col):
+        """Handle the moves on the board"""
+
+        if not self.game:
+            return 
+        
+        current_player = self.game_.current_turn
+        letter = current_player.letter_choice 
+
+        if self.game.make_move(row, col):
+            self.board_buttons[row][col].config(text=letter, fg=current_player.color)
+            self.update_turn_display()
+        else:
+            messagebox.showwarning("Invalid Move", "That cell is already occupied.")
+
+    def update_turn_display(self):
         pass
 
 if __name__ == "__main__":
