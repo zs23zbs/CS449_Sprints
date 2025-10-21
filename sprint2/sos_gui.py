@@ -129,7 +129,7 @@ class SOSGame():
         for i in range(size):
             row_buttons = []
             for j in range(size):
-                btn = tk.Button(
+                button = tk.Button(
                     master=self.board_frame,
                     text="",
                     width=6,
@@ -138,8 +138,8 @@ class SOSGame():
                     font=("Helvetica", 16, "bold"),
                     command=lambda r=i, c=j: self.handle_click(r,c)
                 )
-                btn.grid(row=i, column=j, padx=3, pady=3)
-                row_buttons.append(btn)
+                button.grid(row=i, column=j, padx=3, pady=3)
+                row_buttons.append(button)
             self.board_buttons.append(row_buttons)
     
     def handle_click(self, row, col):
@@ -171,8 +171,8 @@ class SOSGame():
         if self.game:
             self.game.reset()
         for row in self.board_buttons:
-            for btn in row:
-                btn.config(text="", bg="white")
+            for button in row:
+                button.config(text="", bg="white")
         self.update_turn_display()
 
     def start_game_from_setup(self):

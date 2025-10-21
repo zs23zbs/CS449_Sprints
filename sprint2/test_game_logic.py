@@ -1,8 +1,8 @@
 import pytest 
 from game_logic import GameLogic
-from BoardClass import Board
+from sprint2.board_class import Board
 
-"""AI Generated Automated Tests""" # Make sure, correlate to acceptance criteria and user stories from sprint #1 
+"""AI Generated Automated Tests (2)""" 
 def test_make_move_and_switch_turn(): 
     game = GameLogic(3, "Simple")
 
