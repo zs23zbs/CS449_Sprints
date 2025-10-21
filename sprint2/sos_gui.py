@@ -73,6 +73,15 @@ class SOSGame():
         #self.update_turn_display()
 
         self.game_window.mainloop()
+    
+    def create_game_widgets(self):
+        """Layout widgets"""
+
+        # Turn label 
+        turn_frame = tk.Frame(self.game_window, bd=5, relief=tk.RAISED, bg="#20B2AA")
+        self.turn_label = tk.Label(turn_frame, text="", font=("Helvetica", 16, "bold"), bg="#FFFAFA")
+        self.turn_label.pack(padx=5, pady=5)
+        turn_frame.pack(pady=10)
 
 if __name__ == "__main__":
     SOSGame()
