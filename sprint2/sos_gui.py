@@ -112,7 +112,23 @@ class SOSGame():
         button_frame.pack(pady=10)
     
     def create_board(self, size):
-        pass
+        """Creating the button grid for the game board"""
+
+        for i in range(size):
+            row_buttons = []
+            for j in range(size):
+                btn = tk.Button(
+                    master=self.board_frame,
+                    text="",
+                    width=6,
+                    height=3,
+                    bg="white",
+                    font=("Helvetica", 16, "bold"),
+                    command=lambda r=i, c=j: self.handle_click(r,c)
+                )
+                btn.grid(row=i, column=j, padx=3, pady=3)
+                row_buttons.append(btn)
+            self.board_buttons.append(row_buttons)
 
 if __name__ == "__main__":
     SOSGame()
