@@ -105,7 +105,14 @@ class SOSGame():
 
         tk.Button(button_frame, text="REPLAY GAME", height=2, bg="#FFFAFA", command=self.reset_game).grid(row=0, column=0, padx=4, pady=4)
 
-        tk.Button(button_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid()
+        tk.Button(button_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid(row=0, column=1, padx=4, pady=4)
+
+        tk.Button(button_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.destroy_game_window).grid(row=0, column=2, padx=4, pady=4)
+
+        button_frame.pack(pady=10)
+    
+    def create_board(self, size):
+        pass
 
 if __name__ == "__main__":
     SOSGame()
