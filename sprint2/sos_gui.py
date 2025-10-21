@@ -148,7 +148,12 @@ class SOSGame():
             messagebox.showwarning("Invalid Move", "That cell is already occupied.")
 
     def update_turn_display(self):
-        pass
+        """Update the player labels and the turn labels"""
+
+        current_player = self.game.current_turn
+        self.turn_label.config(text=f"Current Turn: {current_player.color.upper()} ({current_player.letter_choice})")
+        self.red_label.config(text=f"RED PLAYER (R): {self.game.player_red.letter_choice}")
+        self.blue_label.config(text=f"BLUE PLAYER (B): {self.game.player_blue.letter_choice}")
 
 if __name__ == "__main__":
     SOSGame()
