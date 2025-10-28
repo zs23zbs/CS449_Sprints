@@ -72,6 +72,7 @@ class SOSGame():
         self.game_window.config(bg="#008B8B")
 
         self.game = GameLogic(self.board_size.get(), self.mode.get())
+
         self.game.player_red.letter_choice = self.red_letter.get()
         self.game.player_blue.letter_choice = self.blue_letter.get()
 
@@ -164,6 +165,8 @@ class SOSGame():
             messagebox.showwarning("Invalid Move", "That cell is already occupied.")
 
     def update_turn_display(self):
+
+        # We need to change this to accomodate the doc type above
         """Update the player labels and the turn labels"""
 
         current_player = self.game.current_turn
