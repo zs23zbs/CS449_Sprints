@@ -11,7 +11,7 @@ class SOSGame():
         self.start_menu.title("SOS Start Menu")
         self.start_menu.config(bg="#008B8B")
 
-        # Variables for start menu
+        # Variables for start menu, must change to accomdate turn mechanics 
         self.board_size = tk.IntVar(value=3)
         self.mode = tk.StringVar(value="Simple Game")
         self.red_letter = tk.StringVar(value="S")
