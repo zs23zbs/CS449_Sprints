@@ -33,8 +33,20 @@ class Board:
         else:
             return False
     
+    def get_letter(self, row, col):
+        """Checks for safety boundaries
+        Returns:
+        None, if out of bound or cell is empty"""
+
+        if 0 <= row < self.game_board and 0 <= col < self.game_board:
+            content_of_cell = self.game_board[row][col]
+            if content_of_cell is not None:
+                return content_of_cell[0] # Takes the the first element in tuple (letter, color)
+            
+        return None
+
     def check_for_SOS(self, row, col):
-        """Detect an SOS in game to determine a winner
+        """Detect an SOS in game to determine a winner (Simple Mode) or points (General Mode)
         
         Args: 
         row (int): Row index for where the letter is placed 
@@ -43,7 +55,15 @@ class Board:
         Returns:
             int: number of SOS lines created 
             """
-
+        
+        directions = [
+            (-1, 0), (1, 0) # Vertical (N, S)
+            (0, -1) , (0, 1) # Horizontal (W, E) 
+            (-1, -1) , (1, 1) # Diagonal 1 (NW, SE)
+            (-1, 1) , (1, -1) # Diagonal 2 (NE, SW)
+        ]
+        
+        counting_SOS = 0  
 
     def place(self, row, col, letter, color): 
         """Place a letter on the board
