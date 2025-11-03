@@ -64,6 +64,39 @@ class Board:
         ]
         
         counting_SOS = 0  
+        current_letter = self.get_letter(row, col) # gets the letter that a player just placed on game board 
+
+        for rd, cd in directions: # rd = row direction, cd = column direction
+
+            # if O is in the middle (among three cells)
+            if current_letter == "O":
+                # Checks: [S] (r-dr, c-dc) -- [O] (new) -- [S] (r+dr, c+dc)
+                s1 = self.get_letter(row - rd, col - cd)
+                s2 = self.get_letter(row + rd, col + cd)
+
+                if s1 == "S" and s1 == "S": # SOS is detected
+                    counting_SOS += 1
+
+            # if S is the in the first or last (among three cells) 
+            if current_letter == "S":
+
+                # S (new) - O - S 
+                # Checks: [S] (new) -- [O] (r+dr, c+dc) -- [S] (r+2dr, c+2dc)
+                o1 = self.get_letter(row + rd, col + cd)
+                s1 = self.get_letter(row + (2 * rd), col + (2 * cd))
+
+                if o1 == "O" and s1 == "S": # another SOS is detected
+                    counting_SOS += 1
+
+                # S - O - S (new)
+                # Checks: [S] (r-2dr, c-2dc) -- [O] (r-dr, c-dc) -- [S] (new)
+                o2 = self.get_letter(row - (2 *rd), col - (2* cd))
+                s2 = self.get_letter(row - rd, col - cd)
+
+                if o2 == "O" and s2 == "S":
+                    counting_SOS += 1
+        return counting_SOS // 2
+
 
     def place(self, row, col, letter, color): 
         """Place a letter on the board
