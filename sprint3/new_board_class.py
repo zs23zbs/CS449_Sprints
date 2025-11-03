@@ -97,7 +97,6 @@ class Board:
                     counting_SOS += 1
         return counting_SOS // 2
 
-
     def place(self, row, col, letter, color): 
         """Place a letter on the board
         

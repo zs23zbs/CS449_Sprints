@@ -1,7 +1,7 @@
 from new_board_class import Board
 from new_player_class import Player
 
-class GameLogic:
+class SOSBaseGameLogic:
     def __init__(self, game_board_size, mode):
         """Initialize Game Logic objects
         
@@ -11,7 +11,6 @@ class GameLogic:
         
         """
         self.board = Board(game_board_size)
-        self.mode = mode
 
         # Created Objects
         self.player_blue = Player("Blue")
@@ -19,6 +18,12 @@ class GameLogic:
 
         # Start with Blue player's turn 
         self.current_turn = self.player_blue
+
+        # score tracking 
+        self.SOS_count = {self.player_red.color : 0, self.player_blue.color : 0}
+
+        # game over flag
+        self.is_game_over = False
 
     def make_move(self, row, col, letter): 
         """Placing a move on game board 
