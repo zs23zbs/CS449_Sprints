@@ -14,13 +14,13 @@ class GameLogic:
         self.mode = mode
 
         # Created Objects
-        self.player_blue = Player("Blue", "S")
-        self.player_red = Player("Red", "S")
+        self.player_blue = Player("Blue")
+        self.player_red = Player("Red")
 
         # Start with Blue player's turn 
         self.current_turn = self.player_blue
 
-    def make_move(self, row, col): 
+    def make_move(self, row, col, letter): 
         """Placing a move on game board 
         
         Args:
@@ -32,7 +32,7 @@ class GameLogic:
         """
 
         if self.board.is_cell_empty(row, col):
-            self.board.place(row, col, self.current_turn.letter_choice, self.current_turn.color)
+            self.board.place(row, col, letter, self.current_turn.color)
             self.switch_turn()
             return True 
         else: 
