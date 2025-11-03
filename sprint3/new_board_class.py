@@ -70,7 +70,7 @@ class Board:
 
             # if O is in the middle (among three cells)
             if current_letter == "O":
-                # Checks: [S] (r-dr, c-dc) -- [O] (new) -- [S] (r+dr, c+dc)
+                # Checks: [S] (r-rd, c-cd) -- [O] (new) -- [S] (r+rd, c+cd)
                 s1 = self.get_letter(row - rd, col - cd)
                 s2 = self.get_letter(row + rd, col + cd)
 
@@ -81,7 +81,7 @@ class Board:
             if current_letter == "S":
 
                 # S (new) - O - S 
-                # Checks: [S] (new) -- [O] (r+dr, c+dc) -- [S] (r+2dr, c+2dc)
+                # Checks: [S] (new) -- [O] (r+rd, c+cd) -- [S] (r+2rd, c+2cd)
                 o1 = self.get_letter(row + rd, col + cd)
                 s1 = self.get_letter(row + (2 * rd), col + (2 * cd))
 
@@ -89,7 +89,7 @@ class Board:
                     counting_SOS += 1
 
                 # S - O - S (new)
-                # Checks: [S] (r-2dr, c-2dc) -- [O] (r-dr, c-dc) -- [S] (new)
+                # Checks: [S] (r-2rs, c-2cd) -- [O] (r-rd, c-cd) -- [S] (new)
                 o2 = self.get_letter(row - (2 *rd), col - (2* cd))
                 s2 = self.get_letter(row - rd, col - cd)
 

@@ -80,3 +80,9 @@ class SOSBaseGameLogic(ABC):
     def reset(self):
         self.board.reset()
         self.current_turn = self.player_blue
+
+class SimpleMode(SOSBaseGameLogic):
+    pass
+
+class GeneralMode(SOSBaseGameLogic):
+    pass
