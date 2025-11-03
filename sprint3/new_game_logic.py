@@ -82,7 +82,58 @@ class SOSBaseGameLogic(ABC):
         self.current_turn = self.player_blue
 
 class SimpleMode(SOSBaseGameLogic):
-    pass
+    def __init__(self, game_board_size):
+        super().__init__(game_board_size)
+        self.game_mode_name = "Simple Game"
+
+    def check_for_game_over(self):
+        """Game over if and only if: 
+            1) Any player scores first SOS, wins
+            2) Board is completely full (draw if no score)
+        """
+
+        red_score = self.SOS_count[self.player_red.color]
+        blue_score = self.SOS_count[self.player_blue.color]
+
+        is_board_full = self.board.is_full()
+
+        if red_score > 0 or blue_score > 0 or is_board_full:
+            self.is_game_over = True
+
+    def determine_winner(self):
+        """Simple Mode Rule: First player to put SOS wins"""
+
+        red_score = self.SOS_count[self.player_red.color]
+        blue_score = self.SOS_count[self.player_blue.color]
+
+        if red_score > 0 and blue_score  == 0: # if red player wins 
+            return self.player_red.color
+        if blue_score > 0 and red_score == 0: # if blue player wins 
+            return self.player_blue.color
+    
+        # if both scored at the same time
+        return "Draw"
 
 class GeneralMode(SOSBaseGameLogic):
-    pass
+    def __init__(self, game_board_size):
+        super().__init__(game_board_size)
+        self.game_mode_name = "General Game"
+
+    def check_for_game_over(self):
+        """Game is only over when the board is full"""
+        if self.board.is_full():
+            self.is_game_over = True
+    
+    def determine_winner(self):
+        """General Mode Rule: player with the most SOS lines wins"""
+
+        red_score = self.SOS_count[self.player_red.color]
+        blue_score = self.SOS_count[self.player_blue.color]
+
+        if red_score > blue_score: # if red player has more
+            return self.player_red.color
+        if blue_score > red_score: # if blue player has more 
+            return self.player_blue.color
+        
+        # if scores are equal 
+        return "Draw"

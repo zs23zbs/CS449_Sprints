@@ -127,3 +127,21 @@ class Board:
             for j in range(self.board_size):
                 row.append(None)
             self.game_board.append(row)
+
+    def is_full(self):
+            """
+            Checks if the game board is completely filled with pieces.
+            
+            Returns: 
+                bool: True if no cells are empty (None), otherwise False.
+            """
+            # Iterate every row in game boarb
+            for row in self.game_board:
+                # Iterate every cell in current row
+                for cell in row:
+                    # If any cell is 'None' (empty), board is not full
+                    if cell is None:
+                        return False
+            
+            # If the loop completes without finding any 'None' cells, the board is full
+            return True
