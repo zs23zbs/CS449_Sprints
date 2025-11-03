@@ -1,7 +1,8 @@
 from new_board_class import Board
 from new_player_class import Player
+from abc import ABC, abstractmethod
 
-class SOSBaseGameLogic:
+class SOSBaseGameLogic(ABC):
     def __init__(self, game_board_size, mode):
         """Initialize Game Logic objects
         
@@ -25,6 +26,22 @@ class SOSBaseGameLogic:
         # game over flag
         self.is_game_over = False
 
+    @abstractmethod
+    def check_for_game_over(self):
+        """
+        ABSTRACT: Determines if the game ended based on mode rules.
+        Will be implemented by SimpleGameLogic and GeneralGameLogic.
+        """
+        pass
+
+    @abstractmethod
+    def determine_winner(self):
+        """
+        ABSTRACT: Calculates the winner based on mode rules (score, first win, etc.).
+        Will be implemented by SimpleGameLogic and GeneralGameLogic.
+        """
+        pass
+
     def make_move(self, row, col, letter): 
         """Placing a move on game board 
         
@@ -38,8 +55,17 @@ class SOSBaseGameLogic:
 
         if self.board.is_cell_empty(row, col):
             self.board.place(row, col, letter, self.current_turn.color)
-            self.switch_turn()
+            new_SOS_line = self.board.check_for_SOS(row, col)
+            if new_SOS_line > 0:
+                self.sos_count[self.current_turn.color] += new_SOS_line
+        
+            self.check_for_game_over() # Calls the abstract method
+
+            if not self.is_game_over and new_SOS_line == 0:
+                self.switch_turn()
+
             return True 
+        
         else: 
             return False
         
