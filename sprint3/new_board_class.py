@@ -32,6 +32,18 @@ class Board:
             return True
         else:
             return False
+    
+    def check_for_SOS(self, row, col):
+        """Detect an SOS in game to determine a winner
+        
+        Args: 
+        row (int): Row index for where the letter is placed 
+        col (int): Column index for where the letter is placed
+        
+        Returns:
+            int: number of SOS lines created 
+            """
+
 
     def place(self, row, col, letter, color): 
         """Place a letter on the board
