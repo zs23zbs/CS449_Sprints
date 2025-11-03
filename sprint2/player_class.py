@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, color):
+    def __init__(self, color, letter):
         """Initialize Player objects
         
         Args: 
@@ -7,3 +7,4 @@ class Player:
         """
         
         self.color = color
+        self.letter = letter

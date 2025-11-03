@@ -1,5 +1,5 @@
-from board_class import Board
-from player_class import Player
+from new_board_class import Board
+from new_player_class import Player
 
 class GameLogic:
     def __init__(self, game_board_size, mode):
