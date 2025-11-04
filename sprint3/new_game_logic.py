@@ -20,3 +20,49 @@ class Board():
                 return content[0] # store tuple (letter, color)
         return None
     
+    def check_for_SOS(self, row, col):
+        """Detects an SOS and return line coordinates"""
+        directions = [
+            (-1, 0), (1, 0),  # Vertical (N, S)
+            (0, -1), (0, 1),  # Horizontal (W,E)
+            (-1, -1), (1, 1). # Diagonal 1 (NW, SE)
+            (-1, 1), (1, -1). # Diagonal 2 (NE, SW) 
+        ]
+
+        newly_found_lines = [] # To accomdate the last of visual lines in game window 
+        current_letter = self.get_letter(row, col)
+
+        for rd, cd in directions: # row direction = rd, cd = column direction
+
+            # when O is in the middle (S - O - S)
+            if current_letter == "O":
+                s1_r, s1_c = (row - rd), (col- cd)
+                s2_r, s2_c = (row + rd), (col + cd)
+                s1 = self.get_letter(s1_r, s1_c)
+                s2 = self.get_letter(s2_r, s2_c)
+
+                if s1 == "S" and s2 == "S": # store the coordinates for the first and last S 
+                    newly_found_lines.append(((s1_r, s1_c), (s2_r, s2_c)))
+            
+            # when S is the first or last (S - O - S)
+            if current_letter == "S":
+                # S (new) - O - S
+                o1_r, o1_c = (row + rd), (col + cd)
+                s1_r, s1_c = row + ( 2 * rd), col + (2 * cd)
+                o1 = self.get_letter(o1_r, o1_c)
+                s1 = seld.get_letter(o2_r, o2_c)
+
+                if o1 == "O" and s1 == "S":
+                    newly_found_lines.append(((row, col), (s1_r, s1_c)))
+
+            
+                # S - O - S (new)
+                s2_r, s2_c = row - (2 * rd), col - (2* cd)
+                o2_r, o2_c = (row - rd), (col - cd)
+                s2 = self.get_letter(s2_r, s2_c)
+                o2 = self.get_letter(o2_r, o2_c)
+
+                if s2 == "S" and o2 == "O":
+                    newly_found_lines.append(((s2_r, s2_c), (row, col)))
+
+        return newly_found_lines
