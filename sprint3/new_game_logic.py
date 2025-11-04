@@ -21,3 +21,34 @@ class SOSGameLogic(ABC):
     @abstractmethod
     def determine_winner(self):
         pass
+
+    def make_move(self, row, col, letter):
+        """Plase letter that user selected on board and handle the game's current state"""
+        current_color = self.current_turn.color # Either Red or Blue
+
+        move_successful = self.board.place(row, col, letter, current_color) # place letter using whichever was selected
+        if move_successful: 
+            score_gained = self.board.check_for_SOS(row, col)
+            score_made = score_gained > 0
+
+            if score_made: # add integer count to score
+                self.SOS_count[current_color] += score_gained
+
+            if self.game_mode_name == "Simple Game":
+                # Simple mode, swtich turns, game ends with whoever scores first
+                self.switch_turn()
+            elif self.game_mode_name == "General Game":
+                # General mode, swithc turns only if no score was made
+                if not score_made:
+                    self.switch_turn()
+            self.check_game_over() # for checking game over
+
+            return True
+        return False
+    
+    def switch_turn(self):
+        """Switch turns between the players with each move made"""
+        if self.current_turn == self.player_blue:
+            self.current_turn = self.player_red
+        else: 
+            self.current_turn = self.player_blue
