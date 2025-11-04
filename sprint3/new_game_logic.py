@@ -83,3 +83,25 @@ class SimpleMode(SOSGameLogic):
         
         # for when the board is full and no one score a point
         return "Draw"
+    
+class GeneralMode(SOSGameLogic):
+    def __init__(self, game_board_size):
+        super().__init__(game_board_size)
+        self.game_mode_name = "General Game"
+
+    def check_game_over(self):
+        """Game over when board is full"""
+        if self.board.is_full():
+            self.is_game_over = True 
+    
+    def determine_winner(self):
+        """General Mode rule: player with the highest score wins """
+        red_score = self.SOS_count["Red"]
+        blue_score = self.SOS_count["Blue"]
+
+        if red_score > blue_score:
+            return self.player_red.color
+        if blue_score > red_score:
+            return self.player_blue.color
+
+        return "Draw"
