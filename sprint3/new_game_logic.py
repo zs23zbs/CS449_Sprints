@@ -76,3 +76,14 @@ class Board():
         self.game_board[row][col] = (letter, color)
 
         return True 
+    
+    def reset(self):
+        """Resets the game board, all cells empty"""
+        self.game_board = [[None] * self.board_size for _ in range(self.board_size)]
+
+    def is_full(self):
+        """Checks if the game board is filled"""
+        for row in self.game_board:
+            if None in row:
+                return False
+        return True 
