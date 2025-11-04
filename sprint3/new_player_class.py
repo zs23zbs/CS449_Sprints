@@ -5,5 +5,5 @@ class Player:
         Args: 
         color (str): The color for identifying players (Red or Blue)
         """
-        
+    
         self.color = color
