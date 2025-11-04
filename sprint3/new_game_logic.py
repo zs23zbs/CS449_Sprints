@@ -1,6 +1,6 @@
 from new_board_class import Board
 from new_player_class import Player
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 
 class SOSGameLogic(ABC):
     def __init__(self, game_board_size):
@@ -13,3 +13,11 @@ class SOSGameLogic(ABC):
 
         self.is_game_over = False
         self.game_mode_name = ""
+
+    @abstractmethod
+    def check_game_over(self):
+        pass
+    
+    @abstractmethod
+    def determine_winner(self):
+        pass
