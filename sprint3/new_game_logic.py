@@ -50,7 +50,7 @@ class Board():
                 o1_r, o1_c = (row + rd), (col + cd)
                 s1_r, s1_c = row + ( 2 * rd), col + (2 * cd)
                 o1 = self.get_letter(o1_r, o1_c)
-                s1 = seld.get_letter(o2_r, o2_c)
+                s1 = self.get_letter(o2_r, o2_c)
 
                 if o1 == "O" and s1 == "S":
                     newly_found_lines.append(((row, col), (s1_r, s1_c)))
@@ -66,3 +66,13 @@ class Board():
                     newly_found_lines.append(((s2_r, s2_c), (row, col)))
 
         return newly_found_lines
+    
+    def place(self, row, col, letter, color):
+        """Place a ltter on the game board"""
+        if not self.is_cell_empty(row, col):
+            return False
+        
+        # store the tuple (letter, color)
+        self.game_board[row][col] = (letter, color)
+
+        return True 
