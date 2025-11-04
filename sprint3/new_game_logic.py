@@ -58,3 +58,28 @@ class SOSGameLogic(ABC):
         self.current_turn = self.player_blue
         self.SOS_count = {self.player_red.color : 0, self.player_blue.color : 0}
         self.is_game_over = False
+    
+class SimpleMode(SOSGameLogic):
+    def __init__(self, game_board_size):
+        super().__init__(game_board_size)
+        self.game_mode_name = "Simple Game"
+
+    def check_game_over(self):
+        """Game over if any player scored first or board is full"""
+        # game over if score exist or board is completely full
+        if self.SOS_count["Red"] > 0 or self.SOS_count["Blue"] > 0 or self.board.is_full():
+            self.is_game_over = True
+    
+    def determine_winner(self):
+        """Simple Mode rule: First player to score is the winner, otherwise Draw"""
+        red_score = self.SOS_count["Red"]
+        blue_score = self.SOS_count["Blue"]
+
+        # check who scored first 
+        if red_score > 0 and blue_score == 0: 
+            return self.player_red.color
+        if blue_score > 0 and red_score == 0:
+            return self.player_blue.color
+        
+        # for when the board is full and no one score a point
+        return "Draw"
