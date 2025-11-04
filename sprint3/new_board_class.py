@@ -1,7 +1,7 @@
 from new_player_class import Player # imports from Player class
 
 class Board():
-    def __intit__(self, board_size):
+    def __init__(self, board_size):
         """Initiate the 2d nested list for board"""
         self.board_size = board_size
         self.game_board = []
@@ -55,7 +55,7 @@ class Board():
                 o1_r, o1_c = (row + rd), (col + cd)
                 s1_r, s1_c = row + ( 2 * rd), col + (2 * cd)
                 o1 = self.get_letter(o1_r, o1_c)
-                s1 = self.get_letter(o2_r, o2_c)
+                s1 = self.get_letter(s1_r, s1_c)
 
                 if o1 == "O" and s1 == "S":
                     newly_found_lines.append(((row, col), (s1_r, s1_c)))

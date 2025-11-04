@@ -41,7 +41,7 @@ class SOSGameLogic(ABC):
             elif self.game_mode_name == "General Game":
                if not score_made:
                    self.switch_turn()
-            self.check_for_game_over()
+            self.check_game_over()
             gui_line_color = current_color.lower()
             colored_lines_info = [(start, end, gui_line_color) for start, end in lines_coords]
             return colored_lines_info
@@ -55,6 +55,7 @@ class SOSGameLogic(ABC):
             self.current_turn = self.player_blue
 
     def reset(self):
+        """Reset the board whenever called"""
         self.board.reset
         self.current_turn = self.player_blue
         self.SOS_count = {self.player_red.color : 0, self.player_blue.color : 0}
