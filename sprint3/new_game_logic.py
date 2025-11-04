@@ -27,23 +27,24 @@ class SOSGameLogic(ABC):
         current_color = self.current_turn.color # Either Red or Blue
 
         move_successful = self.board.place(row, col, letter, current_color) # place letter using whichever was selected
-        if move_successful: 
-            score_gained = self.board.check_for_SOS(row, col)
-            score_made = score_gained > 0
+        if move_successful:
+            lines_coords = self.board.check_for_SOS(row, col)
+            score_made = len(lines_coords) > 0
 
-            if score_made: # add integer count to score
-                self.SOS_count[current_color] += score_gained
+            # update score 
+            if score_made:
+                self.SOS_count[current_color] += len(lines_coords)
 
             if self.game_mode_name == "Simple Game":
-                # Simple mode, swtich turns, game ends with whoever scores first
-                self.switch_turn()
+               self.switch_turn()
+           # General Mode: Only switch turn if NO score was made.
             elif self.game_mode_name == "General Game":
-                # General mode, swithc turns only if no score was made
-                if not score_made:
-                    self.switch_turn()
-            self.check_game_over() # for checking game over
-
-            return True
+               if not score_made:
+                   self.switch_turn()
+            self.check_for_game_over()
+            gui_line_color = current_color.lower()
+            colored_lines_info = [(start, end, gui_line_color) for start, end in lines_coords]
+            return colored_lines_info
         return False
     
     def switch_turn(self):

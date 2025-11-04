@@ -30,11 +30,11 @@ class Board():
         directions = [
             (-1, 0), (1, 0),  # Vertical (N, S)
             (0, -1), (0, 1),  # Horizontal (W,E)
-            (-1, -1), (1, 1). # Diagonal 1 (NW, SE)
-            (-1, 1), (1, -1). # Diagonal 2 (NE, SW) 
+            (-1, -1), (1, 1), # Diagonal 1 (NW, SE)
+            (-1, 1), (1, -1) # Diagonal 2 (NE, SW) 
         ]
-
-        sos_count = 0 # Changed mind in displaying lines, keep track of count 
+  
+        newly_found_lines = [] # Changed mind stuck with drawing lines
         current_letter = self.get_letter(row, col)
 
         for rd, cd in directions: # row direction = rd, cd = column direction
@@ -47,7 +47,7 @@ class Board():
                 s2 = self.get_letter(s2_r, s2_c)
 
                 if s1 == "S" and s2 == "S": # store the coordinates for the first and last S 
-                    sos_count += 1
+                    newly_found_lines.append(((s1_r, s1_c), (s2_r, s2_c)))
             
             # when S is the first or last (S - O - S)
             if current_letter == "S":
@@ -58,7 +58,7 @@ class Board():
                 s1 = self.get_letter(o2_r, o2_c)
 
                 if o1 == "O" and s1 == "S":
-                    sos_count += 1
+                    newly_found_lines.append(((row, col), (s1_r, s1_c)))
 
             
                 # S - O - S (new)
@@ -68,9 +68,9 @@ class Board():
                 o2 = self.get_letter(o2_r, o2_c)
 
                 if s2 == "S" and o2 == "O":
-                    sos_count += 1
+                    newly_found_lines.append(((s2_r, s2_c), (row, col)))
 
-        return sos_count
+        return newly_found_lines
     
     def place(self, row, col, letter, color):
         """Place a ltter on the game board"""
