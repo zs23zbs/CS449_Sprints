@@ -244,3 +244,116 @@ class SOSGame():
                    row_buttons.append(button)
             # This line is now correctly indented
             self.board_buttons.append(row_buttons)
+
+    def handle_click(self, row, col):
+        """Handle the moves on the board"""
+
+        if not self.game or self.game.is_game_over:
+            return
+
+        current_player_color = self.game.current_turn.color
+
+        if current_player_color == "Red":
+            letter = self.red_letter_choice.get()
+        else:
+            letter = self.blue_letter_choice.get()
+
+
+        new_lines_info = self.game.make_move(row, col, letter)
+
+        # to help keep track of moves as lines weren't appearing in game window
+        print(f"Move made at ({row}, {col}) with letter '{letter}'")
+        print(f"Lines info returned: {new_lines_info}")
+
+        if new_lines_info is not False:
+
+            # changed the letter color to black
+            self.board_buttons[row][col].config(text=letter, fg="black")
+
+            if new_lines_info:  # checking if lines were draw
+                print(f"Drawing {len(new_lines_info)} lines")
+                self.draw_sos_lines(new_lines_info)
+            else:
+                print("No SOS patterns detected")
+
+
+            if self.game.is_game_over:
+                self.end_game()
+            else:
+                self.update_turn_display()
+        else:
+            messagebox.showwarning("Invalid Move", "That cell is already occupied.")
+    
+    def draw_sos_lines(self, lines_info): # new method for sprint #3
+        """Draws lines in the color of the player who scored the SOS."""
+        if not lines_info:
+            return
+
+        size = self.board_size.get()
+        cell_width = 75  # match with the cell size
+        cell_height = 75
+
+        for info in lines_info:
+            (start_r, start_c), (end_r, end_c), color = info
+        
+            # calculate the positions corresponding to the canvas coords
+            x1 = start_c * cell_width + cell_width / 2
+            y1 = start_r * cell_height + cell_height / 2
+            x2 = end_c * cell_width + cell_width / 2
+            y2 = end_r * cell_height + cell_height / 2
+
+            # make the line
+            self.canvas.create_line(x1, y1, x2, y2,
+                                    fill=color,
+                                    width=6,
+                                    tag="sos_line")
+
+        self.canvas.tag_lower("all")
+        self.canvas.tag_raise("sos_line")
+        self.canvas.update_idletasks()
+
+    def update_turn_display(self):
+        """Update the player labels and the turn labels"""
+
+        current_player = self.game.current_turn
+        self.turn_label.config(text=f"Current Turn: {current_player.color.upper()}")
+        red_score = self.game.SOS_count["Red"]
+        blue_score = self.game.SOS_count["Blue"]
+        self.red_label.config(text=f"RED PLAYER (R)\nScore: {red_score}")
+        self.blue_label.config(text=f"BLUE PLAYER (B)\nScore: {blue_score}")
+
+        self.update_player_controls()
+    
+    def end_game(self):
+        """Determines the winner of game"""
+        winner = self.game.determine_winner()
+
+        self.update_turn_display()
+
+        if winner == "Draw": # if draw, update the message of state
+            self.turn_label.config(text=f"GAME OVER: IT'S A DRAW!")
+            messagebox.showinfo("Game Over", f"The {self.mode.get()} has ended in a Draw!")
+        else:
+            self.turn_label.config(text=f"GAME OVER: {winner.upper()} WINS!")
+            messagebox.showinfo("Game Over", f"The {self.mode.get()} Winner is: {winner.upper()}!")
+    
+    def reset_game(self):
+        """reset the game"""
+
+        if self.game:
+            self.game.reset()
+        self.canvas.delete("sos_line")
+        for row in self.board_buttons:
+            for button in row:
+                button.config(text="", fg="black", bg="white") 
+
+        self.set_letter_selection("Red", "S")
+        self.set_letter_selection("Blue", "S")
+        self.update_turn_display()
+    
+    def start_game_from_setup(self):
+        self.game_window.destroy()
+        SOSGame()
+
+if __name__ == "__main__":
+    SOSGame()
