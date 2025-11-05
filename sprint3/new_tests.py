@@ -11,3 +11,16 @@ def test_invalid_move_doesnt_change_turn():
 
     assert move_is_successful is False
     assert game.current_turn.color == previous_turn # turn must remain on red
+
+def test_board_resets():
+    """Tests the game reset function."""
+    game = SimpleGameLogic(3)
+    game.make_move(1,2, "O")
+    game.reset()
+
+    # Check if the board is empty
+    for row in game.board.game_board:
+        for cell in row:
+            assert cell is None
+    # Check if the turn reset
+    assert game.current_turn.color == "Blue"

@@ -56,7 +56,7 @@ class SOSGameLogic(ABC):
 
     def reset(self):
         """Reset the board whenever called"""
-        self.board.reset
+        self.board.reset()
         self.current_turn = self.player_blue
         self.SOS_count = {self.player_red.color : 0, self.player_blue.color : 0}
         self.is_game_over = False
