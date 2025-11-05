@@ -191,3 +191,27 @@ class SOSGame():
 
 if __name__ == "__main__": 
     SOSGame()
+
+# for drawing line across detected SOS pattern
+    self.board_buttons = []
+    self.canvas.delete("all")
+    self.canvas.update_idletasks()
+    cell_width = self.canvas.winfo_width() / size
+    cell_height = self.canvas.winfo_height() / size
+    
+    for i in range(size):
+        row_buttons = []
+        for j in range(size):
+               button = tk.Button(
+                   master=self.canvas,
+                   text="",
+                   width=6,
+                   height=3,
+                   bg="white",
+                   font=("Helvetic", 16, "bold"),
+                   command=lambda r=i, c=j: self.handle_click(r,c))
+               x_center = j * cell_width + cell_width / 2
+               y_center = i * cell_height + cell_height / 2
+               self.canvas.create_window(x_center, y_center, window=button, anchor=tk.CENTER)
+               row_buttons.append(button)
+            self.board_buttons.append(row_buttons)
