@@ -1,6 +1,5 @@
 import pytest
 from new_game_logic import SimpleMode as SimpleGameLogic, GeneralMode as GeneralGameLogic
-from new_board_class import Board
 
 def test_invalid_move_doesnt_change_turn():
     """Tests making a move on an occupied cell and verifies the turn remains the same"""
