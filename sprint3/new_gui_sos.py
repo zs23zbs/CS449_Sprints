@@ -1,4 +1,3 @@
-from new_player_class import Player           
 from new_game_logic import SimpleMode, GeneralMode
 import tkinter as tk
 from tkinter import messagebox
