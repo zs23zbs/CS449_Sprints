@@ -16,8 +16,16 @@ class Player(ABC):
         pass 
 
 class HumanPlayer(Player):
-    pass
-        
+    def __init__(self, color):
+        super().__init__(color)
 
+    def next_move(self, board, available_moves):
+        # For now, Handle_click function in GUI should handle human moves 
+        return None
+        
 class ComputerPlayer(Player):
-    pass
+    def __init__(self, color):
+        super().__int__(color)
+
+    def next_move(self, board, available_moves):
+        pass
