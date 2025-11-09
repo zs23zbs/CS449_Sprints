@@ -2,7 +2,6 @@
 from abc import ABC, abstractmethod
 
 class Player(ABC):
-    @abstractmethod
     def __init__(self, color):
         """Initialize Player objects
         
@@ -12,11 +11,13 @@ class Player(ABC):
     
         self.color = color
 
+    @abstractmethod
     def next_move(self, board, available_moves):
         pass 
 
 class HumanPlayer(Player):
     pass
+        
 
 class ComputerPlayer(Player):
     pass
