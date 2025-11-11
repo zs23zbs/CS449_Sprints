@@ -30,3 +30,4 @@ class ComputerPlayer(Player):
     def next_move(self, board):
         """Looks through the current state of game board and make a valid move"""
         available_moves = [] # store the moves (tuple of cell and letter) that the computer player can make
+        
