@@ -22,7 +22,7 @@ class Board():
         if 0 <= row < self.board_size and 0 <= col < self.board_size:
             content = self.game_board[row][col]
             if content is not None: # if the cell is not empty 
-                return content[0] # store tuple (letter, color)
+                return content[0] # take the letter from tuple (letter, color)
         return None
     
     def check_for_SOS(self, row, col):
