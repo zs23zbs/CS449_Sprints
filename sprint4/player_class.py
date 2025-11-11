@@ -27,7 +27,7 @@ class HumanPlayer(Player):
         
 class ComputerPlayer(Player):
     def __init__(self, color):
-        super().__int__(color)
+        super().__init__(color)
 
     def next_move(self, board):
         """Looks through the current state of game board and make a valid move"""
