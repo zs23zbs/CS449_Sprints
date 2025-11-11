@@ -30,7 +30,12 @@ class ComputerPlayer(Player):
         super().__init__(color)
 
     def next_move(self, board):
-        """Looks through the current state of game board and make a valid move"""
+        """Looks through the current state of game board and make a valid move
+        
+        Args:
+        board (2d list): Nested 2D list of the game board
+        """
+
         available_moves = [] # store the moves (tuple of cell and letter) that the computer player can make
 
         # Iterate through all the rows and columns of board game 

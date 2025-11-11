@@ -14,3 +14,12 @@ class Board():
         if not (0 <= row < self.board_size and 0 <= col < self.board_size):
             return False
         return self.game_board[row][col] is None 
+
+    def place(self, row, col, letter, color):
+        """Place a ltter on the game board"""
+        if not self.is_cell_empty(row, col):
+            return False
+        
+        self.game_board[row][col] = (letter, color)
+
+        return True 
