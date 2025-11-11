@@ -11,6 +11,6 @@ class Board():
 
     def is_cell_empty(self, row, col):
         """Checks if board cell is empty and checks boundaries"""
-        if not (0 <= row < self.board_size and 0 <= col < self.board_size): # if not within bounds 
+        if not (0 <= row < self.board_size and 0 <= col < self.board_size):
             return False
         return self.game_board[row][col] is None 
