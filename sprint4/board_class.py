@@ -57,7 +57,7 @@ class Board():
 
                 if s1 == "S" and s2 == "S": 
                     line_tuple1 = ((s1_r, s1_c), (row, col), (s2_r, s2_c))
-                    newly_found_lines.append({"line": line_tuple1, "color": players_color})
+                    newly_found_lines.append(line_tuple1)
             
             # when S is the first or last (S - O - S)
             if current_letter == "S":
@@ -69,7 +69,7 @@ class Board():
 
                 if o1 == "O" and s1 == "S":
                     line_tuple2 = ((row, col), (o1_r, o1_c), (s1_r, s1_c))
-                    newly_found_lines.append({"line": line_tuple2, "color": players_color})
+                    newly_found_lines.append(line_tuple2)
 
             
                 # S - O - S (new)
@@ -80,7 +80,7 @@ class Board():
 
                 if s2 == "S" and o2 == "O":
                     line_tuple3 = ((s2_r, s2_c), (o2_r, o2_c), (row, col))
-                    newly_found_lines.append({"line": line_tuple3, "color": players_color})
+                    newly_found_lines.append(line_tuple3)
 
         return newly_found_lines
     
