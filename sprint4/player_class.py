@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from board_class import Board
 import random
 
 class Player(ABC):
@@ -41,9 +42,19 @@ class ComputerPlayer(Player):
             for col in range(board.board_size):
                 # if the cell in board is empty, make cell available for a move
                 if board.is_cell_empty(row, col): 
+
+                    # Immediate win strategy 
+                    for letter in ["S", "O"]:
+                        board.place(row, col, letter, self.color) # place a temporary move
+                        lines = board.check_for_SOS(row, col) # check for SOS pattern
+                        board.game_board[row][col] # remove the temporary move
+                        if len(lines) > 0: 
+                            return (row, col, letter)
+
                     available_moves.append((row, col, "S"))
                     available_moves.append((row, col, "O"))
 
+        # Random strategy 
         if available_moves: # if the board is full
             computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
             return computer_move
