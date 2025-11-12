@@ -13,3 +13,13 @@ class SOSLogic(ABC):
         self.current_turn = player_blue
         self.score_count = {self.player_blue.color : 0, self.player_red.color: 0}
     
+        self.is_game_over = False
+        self.game_mode = ""
+    
+    @abstractmethod
+    def check_game_over(self):
+        pass
+    
+    @abstractmethod
+    def determine_winner(self):
+        pass
