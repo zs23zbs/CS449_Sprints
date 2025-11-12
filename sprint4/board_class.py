@@ -23,8 +23,16 @@ class Board():
         self.game_board[row][col] = (letter, color)
 
         return True 
+
+    def get_letter(self, row, col):
+        """Returns the letter (S or O) from a cell or None"""
+        if 0 <= row < self.board_size and 0 <= col < self.board_size:
+            content = self.game_board[row][col]
+            if content is not None: # if the cell is not empty 
+                return content[0] # take the letter from tuple (letter, color)
+        return None
     
-    # Considering refactoring method 
+    # Refactored, but doubtful 
     def check_for_SOS(self, row, col):
         """Detects an SOS and return line coordinates"""
         directions = [
@@ -34,8 +42,9 @@ class Board():
             (-1, 1), (1, -1) # Diagonal 2 (NE, SW) 
         ]
   
-        newly_found_lines = [] # Changed mind stuck with drawing lines
+        newly_found_lines = [] 
         current_letter = self.get_letter(row, col)
+        players_color = self.game_board[row][col][1] # get whichever players color 
 
         for rd, cd in directions: # row direction = rd, cd = column direction
 
@@ -46,8 +55,9 @@ class Board():
                 s1 = self.get_letter(s1_r, s1_c)
                 s2 = self.get_letter(s2_r, s2_c)
 
-                if s1 == "S" and s2 == "S": # store the coordinates for the first and last S 
-                    newly_found_lines.append(((s1_r, s1_c), (s2_r, s2_c)))
+                if s1 == "S" and s2 == "S": 
+                    line_tuple1 = ((s1_r, s1_c), (row, col), (s2_r, s2_c))
+                    newly_found_lines.append({"line": line_tuple1, "color": players_color})
             
             # when S is the first or last (S - O - S)
             if current_letter == "S":
@@ -58,7 +68,8 @@ class Board():
                 s1 = self.get_letter(s1_r, s1_c)
 
                 if o1 == "O" and s1 == "S":
-                    newly_found_lines.append(((row, col), (s1_r, s1_c)))
+                    line_tuple2 = ((row, col), (o1_r, o1_c), (s1_r, s1_c))
+                    newly_found_lines.append({"line": line_tuple2, "color": players_color})
 
             
                 # S - O - S (new)
@@ -68,7 +79,8 @@ class Board():
                 o2 = self.get_letter(o2_r, o2_c)
 
                 if s2 == "S" and o2 == "O":
-                    newly_found_lines.append(((s2_r, s2_c), (row, col)))
+                    line_tuple3 = ((s2_r, s2_c), (o2_r, o2_c), (row, col))
+                    newly_found_lines.append({"line": line_tuple3, "color": players_color})
 
         return newly_found_lines
     
