@@ -1,6 +1,4 @@
-"""Need to refactor Player Class to include Human and Computer Player"""
 from abc import ABC, abstractmethod
-from board_class import Board
 import random
 
 class Player(ABC):

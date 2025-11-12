@@ -31,7 +31,7 @@ class Board():
             if content is not None: # if the cell is not empty 
                 return content[0] # take the letter from tuple (letter, color)
         return None
-    
+
     # Refactored, but doubtful 
     def check_for_SOS(self, row, col):
         """Detects an SOS and return line coordinates"""
@@ -44,7 +44,7 @@ class Board():
   
         newly_found_lines = [] 
         current_letter = self.get_letter(row, col)
-        players_color = self.game_board[row][col][1] # get whichever players color 
+        players_color = self.game_board[row][col][1] # get whichever players color makes a score
 
         for rd, cd in directions: # row direction = rd, cd = column direction
 
