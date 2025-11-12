@@ -1,5 +1,5 @@
 from board_class import Board
-from player_class import Player
+from player_class import ComputerPlayer
 from abc import ABC, abstractmethod
 
 # Must refactor!
@@ -58,3 +58,10 @@ class SOSLogic(ABC):
         
         return False
 
+    def handles_comp_turns(self):
+        # collect the computers scoring lines 
+        total_computer_lines = []
+
+        # makes sure that current turn is the computer players and the game isn't over yet 
+        while (isinstance(self.current_turn, ComputerPlayer) and not self.is_game_over): 
+            pass
