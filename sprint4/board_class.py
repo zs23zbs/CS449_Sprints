@@ -71,3 +71,19 @@ class Board():
                     newly_found_lines.append(((s2_r, s2_c), (row, col)))
 
         return newly_found_lines
+    
+    def reset(self):
+        """Resets the game board, all cells empty"""
+        self.game_board = []
+        for i in range(self.board_size): 
+            row = []
+            for j in range(self.board_size):
+                row.append(None)
+            self.game_board.append(row)
+    
+    def is_full(self):
+        """Checks if the game board is filled"""
+        for row in self.game_board:
+            if None in row:
+                return False
+        return True 
