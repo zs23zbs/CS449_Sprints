@@ -41,7 +41,7 @@ class SOSLogic(ABC):
             
             # if simple mode when player scores then game over
             if self.game_mode == "Simple Game":
-                self.check_game_over()
+                self.is_game_over = True
 
             # otherwise switch turns in General Game (if sos pattern not made)
             elif self.game_mode == "General Game":
@@ -77,7 +77,8 @@ class SOSLogic(ABC):
                 self.score_count[computers_turn] += len(made_sos)
                
             if self.game_mode == "Simple Game":
-                self.check_game_over()
+                self.is_game_over = True 
+
             elif self.game_mode == "General Game":
                 if not made_sos: 
                     self.switch_turn()
@@ -108,12 +109,26 @@ class SOSLogic(ABC):
 class SimpleMode(SOSLogic):
     def __init__(self, game_board_size):
         super().__init__(game_board_size)
+        self.game_mode == "Simple Game"
 
     def check_game_over(self):
-        pass
+        """Game is over the board is full"""
+        if self.board.is_full():
+            self.is_game_over = True 
 
     def determine_winner(self):
-        pass
+        """Simple Mode rule: First player to create an SOS pattern is the winner, otherwise draw"""
+        # sets whose score is who
+        red_score = self.score_count["Red"]
+        blue_score = self.score_count["Blue"]
+
+        if red_score > 0 and blue_score == 0: 
+            return self.player_red.color # red is the winner
+        elif blue_score > 0 and red_score == 0: 
+            return self.player_blue.color # blue is the winner 
+        
+        # no one scored
+        return "Draw"
 
 class GeneralMode(SOSLogic):
     def __init__(self, game_board_size):

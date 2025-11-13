@@ -41,6 +41,7 @@ class SOSGameLogic(ABC):
             elif self.game_mode_name == "General Game":
                if not score_made:
                    self.switch_turn()
+                   
             self.check_game_over()
             gui_line_color = current_color.lower()
             colored_lines_info = [(start, end, gui_line_color) for start, end in lines_coords]
