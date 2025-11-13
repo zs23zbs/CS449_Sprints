@@ -46,7 +46,7 @@ class ComputerPlayer(Player):
                     for letter in ["S", "O"]:
                         board.place(row, col, letter, self.color) # place a temporary move
                         lines = board.check_for_SOS(row, col) # check for SOS pattern
-                        board.game_board[row][col] # remove the temporary move
+                        board.game_board[row][col] # remove the temporary move, incredibly doubtful about this line 
                         if len(lines) > 0: 
                             return (row, col, letter)
 

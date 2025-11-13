@@ -26,7 +26,18 @@ class SOSLogic(ABC):
     
     def making_move(self, row, col, letter):
         """Players make a move on board and establish the game's current state"""
-        pass
+        
+        current_player_color = self.current_turn.color # get the which players color turn is it 
+        valid_move = self.board.place(row, col, letter, current_player_color) # current player makes a valid move 
+
+        # if current players move make an SOS
+        if valid_move:
+            found_sos = self.board.check_for_SOS(row, col) #checks if a sos pattern was found 
+            score_made = len(found_sos) > 0 # capture the score amount with each sos pattern found 
+
+        # increment current player who scored with an sos pattern 
+        
+
 
     def during_computers_turn(self):
         """Checks condition on computers turn, making a move, checking if computer wins"""
@@ -47,7 +58,21 @@ class SOSLogic(ABC):
         self.is_game_over = False
 
 class SimpleMode(SOSLogic):
-    pass
+    def __init__(self, game_board_size):
+        super().__init__(game_board_size)
+
+    def check_game_over(self):
+        pass
+
+    def determine_winner(self):
+        pass
 
 class GeneralMode(SOSLogic):
-    pass
+    def __init__(self, game_board_size):
+        super().__init(game_board_size)
+    
+    def check_game_over(self):
+        pass
+    
+    def determine_winner(self):
+        pass
