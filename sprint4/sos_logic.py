@@ -33,11 +33,20 @@ class SOSLogic(ABC):
         # if current players move make an SOS
         if valid_move:
             found_sos = self.board.check_for_SOS(row, col) #checks if a sos pattern was found 
-            score_made = len(found_sos) > 0 # capture the score amount with each sos pattern found 
+            score_made = len(found_sos) > 0 # boolean if a score was made 
 
-        # increment current player who scored with an sos pattern 
+        # increment current (red or blue) player who scored with an sos pattern 
+        if score_made: 
+            self.score_count[current_player_color] += len(found_sos)
         
+        # if simple mode when player scores then game over
+        if self.game_mode == "Simple Game":
+            self.check_game_over()
 
+        # otherwise switch turns in General Game (if sos pattern not made)
+        elif self.game_mode == "General Game":
+            if not score_made: 
+                self.switch_turn()
 
     def during_computers_turn(self):
         """Checks condition on computers turn, making a move, checking if computer wins"""
