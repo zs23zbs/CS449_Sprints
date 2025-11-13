@@ -133,9 +133,22 @@ class SimpleMode(SOSLogic):
 class GeneralMode(SOSLogic):
     def __init__(self, game_board_size):
         super().__init(game_board_size)
+        self.game_mode == "General Game"
     
     def check_game_over(self):
-        pass
+        """Game is over the board is full or players have the same score"""
+        if self.score_count["Red"] == self.score_count["Blue"] or self.board.is_full():
+            self.is_game_over = True 
     
     def determine_winner(self):
-        pass
+        """General Mode rule: The player with the highest score (most sos patterns) wins, otherwise draw"""
+        # sets whose score is who
+        red_score = self.score_count["Red"]
+        blue_score = self.score_count["Blue"]
+
+        if red_score > blue_score: # if red scores more 
+            return self.player_red.color # red wins
+        elif blue_score > red_score: # if blue scores more 
+            return self.player_blue.color # blue wins
+        
+        return "Draw" # if niether condition works 
