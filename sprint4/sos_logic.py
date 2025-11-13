@@ -10,8 +10,8 @@ class SOSLogic(ABC):
         self.board = Board(game_board_size)
         self.player_blue = player_blue 
         self.player_red = player_red
-        self.current_turn = player_blue # reconsider 
-        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # sets the score to zero 
+        self.current_turn = player_blue # reconsidering
+        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # sets the initial score to zero 
     
         self.is_game_over = False
         self.game_mode = ""
@@ -24,44 +24,26 @@ class SOSLogic(ABC):
     def determine_winner(self):
         pass
     
-    def make_move(self, row, col, letter):
-        """Plase letter that user selected on board and handle the game's current state"""
-        current_color = self.current_turn.color # Either Red or Blue
+    def making_move(self, row, col, letter):
+        """Players make a move on board and establish the game's current state"""
+        pass
 
-        move_successful = self.board.place(row, col, letter, current_color) # place letter using whichever was selected
-        if move_successful:
-            lines_coords = self.board.check_for_SOS(row, col)
-            score_made = len(lines_coords) > 0
+    def during_computers_turn(self):
+        """Checks conditions on computers turn, making a move, checking if computer wins"""
+        pass
 
-            # update score 
-            if score_made:
-                self.SOS_count[current_color] += len(lines_coords)
+    def switch_turn():
+        pass
 
-            if self.game_mode_name == "Simple Game":
-               self.switch_turn()
+    def reset_board(self):
+        """Resets the game board"""
+        self.board.reset() # reset the game board 
+        self.current_turn = self.player_blue # automatically set the current player to blue 
+        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # reset the score count 
+        self.is_game_over = False
 
-           # General Mode: Only switch turn if NO score was made.
-            elif self.game_mode_name == "General Game":
-               if not score_made:
-                   self.switch_turn()
+class SimpleMode(SOSLogic):
+    pass
 
-            self.check_game_over()
-        
-            # Preare the human players lines (track who scored which pattern)
-            gui_lines_color = current_color.lower()
-            human_lines_info = [(start, end, gui_lines_color) for start, end in lines_coords]
-
-            computer_lines_info = self.handles_comp_turns() # calling new method 
-
-            human_lines_info.extend(computer_lines_info)
-            return human_lines_info
-        
-        return False
-
-    def handles_comp_turns(self):
-        # collect the computers scoring lines 
-        total_computer_lines = []
-
-        # makes sure that current turn is the computer players and the game isn't over yet 
-        while (isinstance(self.current_turn, ComputerPlayer) and not self.is_game_over): 
-            pass
+class GeneralMode(SOSLogic):
+    pass

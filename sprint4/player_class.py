@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from board_class import Board
 import random
 
 class Player(ABC):
@@ -13,14 +12,14 @@ class Player(ABC):
         self.color = color
 
     @abstractmethod
-    def next_move(self, board):
+    def get_move(self, board):
         pass 
 
 class HumanPlayer(Player):
     def __init__(self, color):
         super().__init__(color)
 
-    def next_move(self, board):
+    def get_move(self, board):
         # For now, Handle_click function in GUI should handle human moves 
         return None
         
@@ -28,7 +27,7 @@ class ComputerPlayer(Player):
     def __init__(self, color):
         super().__init__(color)
 
-    def next_move(self, board):
+    def get_move(self, board):
         """Looks through the current state of game board and make a valid move
         
         Args:
@@ -55,7 +54,7 @@ class ComputerPlayer(Player):
                     available_moves.append((row, col, "O"))
 
         # Random strategy 
-        if available_moves: # if the board is full
+        if available_moves: # if the board is not full
             computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
             return computer_move
         else:

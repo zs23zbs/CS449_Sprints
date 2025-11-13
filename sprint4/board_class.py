@@ -3,6 +3,7 @@ class Board():
         """Initiate the 2d nested list for board"""
         self.board_size = board_size
         self.game_board = []
+
         for i in range(board_size): 
             row = []
             for j in range(board_size):
@@ -32,7 +33,7 @@ class Board():
                 return content[0] # take the letter from tuple (letter, color)
         return None
 
-    # Refactored, but doubtful 
+    # Refactor again, but doubtful 
     def check_for_SOS(self, row, col):
         """Detects an SOS and return line coordinates"""
         directions = [
@@ -42,9 +43,8 @@ class Board():
             (-1, 1), (1, -1) # Diagonal 2 (NE, SW) 
         ]
   
-        newly_found_lines = [] 
+        found_SOS= [] 
         current_letter = self.get_letter(row, col)
-        players_color = self.game_board[row][col][1] # get whichever players color makes a score
 
         for rd, cd in directions: # row direction = rd, cd = column direction
 
@@ -57,7 +57,7 @@ class Board():
 
                 if s1 == "S" and s2 == "S": 
                     line_tuple1 = ((s1_r, s1_c), (row, col), (s2_r, s2_c))
-                    newly_found_lines.append(line_tuple1)
+                    found_SOS.append(line_tuple1)
             
             # when S is the first or last (S - O - S)
             if current_letter == "S":
@@ -69,7 +69,7 @@ class Board():
 
                 if o1 == "O" and s1 == "S":
                     line_tuple2 = ((row, col), (o1_r, o1_c), (s1_r, s1_c))
-                    newly_found_lines.append(line_tuple2)
+                    found_SOS.append(line_tuple2)
 
             
                 # S - O - S (new)
@@ -80,9 +80,9 @@ class Board():
 
                 if s2 == "S" and o2 == "O":
                     line_tuple3 = ((s2_r, s2_c), (o2_r, o2_c), (row, col))
-                    newly_found_lines.append(line_tuple3)
+                    found_SOS.append(line_tuple3)
 
-        return newly_found_lines
+        return found_SOS
     
     def reset(self):
         """Resets the game board, all cells empty"""
