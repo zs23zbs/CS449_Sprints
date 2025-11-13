@@ -29,17 +29,21 @@ class SOSLogic(ABC):
         pass
 
     def during_computers_turn(self):
-        """Checks conditions on computers turn, making a move, checking if computer wins"""
+        """Checks condition on computers turn, making a move, checking if computer wins"""
         pass
 
-    def switch_turn():
-        pass
+    def switch_turn(self):
+        """Switch turns between players after each move"""
+        if self.current_turn == self.player_blue: 
+            self.current_turn = self.player_red
+        else: 
+            self.current_turn = self.player_blue
 
     def reset_board(self):
         """Resets the game board"""
         self.board.reset() # reset the game board 
         self.current_turn = self.player_blue # automatically set the current player to blue 
-        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # reset the score count 
+        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # reset the score count for players 
         self.is_game_over = False
 
 class SimpleMode(SOSLogic):
