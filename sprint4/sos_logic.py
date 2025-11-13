@@ -47,6 +47,8 @@ class SOSLogic(ABC):
         elif self.game_mode == "General Game":
             if not score_made: 
                 self.switch_turn()
+        
+        self.check_game_over()
 
     def during_computers_turn(self):
         """Checks condition on computers turn, making a move, checking if computer wins"""
