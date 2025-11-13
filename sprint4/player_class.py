@@ -54,8 +54,8 @@ class ComputerPlayer(Player):
                     available_moves.append((row, col, "O"))
 
         # Random strategy 
-        if available_moves: # if the board is not full
+        if available_moves:
             computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
             return computer_move
         else:
-            return None # the board is full 
+            return None 

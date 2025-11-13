@@ -10,7 +10,7 @@ class SOSLogic(ABC):
         self.board = Board(game_board_size)
         self.player_blue = player_blue 
         self.player_red = player_red
-        self.current_turn = player_blue # reconsidering
+        self.current_turn = player_blue 
         self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # sets the initial score to zero 
     
         self.is_game_over = False
@@ -24,7 +24,7 @@ class SOSLogic(ABC):
     def determine_winner(self):
         pass
     
-    def making_move(self, row, col, letter):
+    def making_move(self, row, col, letter): # For human player
         """Players make a move on board and establish the game's current state"""
         
         current_player_color = self.current_turn.color # get the which players color turn is it 
@@ -50,9 +50,29 @@ class SOSLogic(ABC):
         
         self.check_game_over()
 
-    def during_computers_turn(self):
-        """Checks condition on computers turn, making a move, checking if computer wins"""
-        pass
+        return False
+
+    def computers_move(self):
+       """Manage the computers turn"""
+       total_computers_patterns = [] # collects all the sos patterns the computer has made 
+
+        # while it is the computers turn and the game is not over
+       while (isinstance(self.current_turn, ComputerPlayer) and not self.is_game_over):
+           computers_move = self.current_turn.get_move(self.board) # computer gets a valid move
+
+           if computers_move: 
+               computers_turn = self.current_turn
+               computers_color = self.current_turn.color
+
+               row, col, letter = computers_move # unpack computer move entry 
+               self.board.place(row, col, letter, computers_color) # place computers move on game board
+               made_sos = self.board.check_for_SOS(row, col) # check if computer makes an SOS pattern
+               computer_score = len(made_sos) > 0 
+
+            
+
+
+
 
     def switch_turn(self):
         """Switch turns between players after each move"""
