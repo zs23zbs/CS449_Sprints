@@ -10,7 +10,7 @@ class SOSGame():
         self.start_menu.config(bg="#008B8B")
 
         # Varaibles for start_menu buttons (board size and mode)
-        self.board_size = tk.Var(value=3) # default/smallest board size
+        self.board_size = tk.IntVar(value=3) # default/smallest board size
         self.mode = tk.StringVar(value="Simple Game") # default game mode
 
         # To start with for letter choices
