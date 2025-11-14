@@ -42,13 +42,18 @@ class SOSGame():
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
 
+        # Making the Start Game Button
+        start_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RIDGE, bg="#008B8B")
+        tk.Button(start_frame, text="Start SOS Game", height=2, bg="#FFFAFA", fg="black", command=self.start_game).grid(row=0, column=0, padx=5, pady=5)
+        start_frame.grid(row=5, column=0, columnspan=2, pady=10)
+    
+    def start_game(self):
+        pass
+
     def set_letter_selection (self, player_color, letter):
         pass
 
     def create_game_widgets(self):
-        pass
-
-    def start_game(self):
         pass
 
     def create_board(self, size):
