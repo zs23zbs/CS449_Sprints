@@ -2,7 +2,8 @@ from board_class import Board
 from player_class import ComputerPlayer
 from abc import ABC, abstractmethod
 
-# Must refactor!
+# Might need to refactor later, depending on GUI  
+
 
 class SOSLogic(ABC):
     def __init__(self, game_board_size, player_blue, player_red):
@@ -35,7 +36,7 @@ class SOSLogic(ABC):
             found_sos = self.board.check_for_SOS(row, col) #checks if a sos pattern was found 
             score_made = len(found_sos) > 0 # boolean if a score was made 
 
-            # increment current (red or blue) player who scored with an sos pattern 
+            # increment current (red or blue) player scored  
             if score_made: 
                 self.score_count[current_player_color] += len(found_sos)
             
