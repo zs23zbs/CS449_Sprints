@@ -37,6 +37,9 @@ class SOSGame():
     def create_board(self, size):
         pass
 
+    def draw_sos_line(self, lines_info): # will heavily refactor later 
+        pass 
+
     def reset_game(self):
         pass
 
