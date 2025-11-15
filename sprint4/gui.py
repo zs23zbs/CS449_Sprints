@@ -153,9 +153,35 @@ class SOSGame():
         self.board_container = tk.Frame(main_game_area_frame, bg="lightblue", bd=5, relief=tk.RIDGE)
         self.board_container.grid(row=0, column=1, padx=20, pady=10)
 
+        # Configure the size of game board  
+        size = (self.board_size.get()) * 75
+        
+        self.canvas = tk.Canvas(self.board_container, width=size, bg="white", highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
 
+        # Blue player Info
+        blue_controls_frame = tk.Frame(main_game_area_frame, bg="#008B8B")
+        blue_controls_frame.grid(row=0, column=2, padx=20, pady=10, sticky=tk.N)
 
+        blue_frame = tk.Frame(blue_controls_frame, bd=5, relief=tk.RIDGE, bg="#0000CD")
+        self.blue_label = tk.Label(blue_frame, text="", bg="#1E90FF", fg="black", font=("Helvetica", 14, "bold"))
+        self.blue_label.pack(padx=10, pady=5)
+        blue_frame.pack(pady=10)
 
+        blue_letter_frame = tk.Frame(blue_controls_frame, bd=5, relief=tk.RIDGE, bg="#20B2AA")
+        tk.Label(blue_letter_frame, text="Selected Move:", bg="#FFFAFA", fg="black").pack(side=tk.TOP, padx=5, pady=5)
+
+        # Blue player toggle button for S or O
+        self.blue_s_button = tk.Button(blue_letter_frame, text="S", width=4, command=lambda: self.set_letter_selection("Blue", "S"))
+        self.blue_o_button = tk.Button(blue_letter_frame, text="O", width=4, command=lambda: self.set_letter_selection("Blue", "O"))
+        
+        self.blue_s_button.pack(side=tk.LEFT, padx=5)
+        self.blue_o_button.pack(side=tk.LEFT, padx=5)
+        blue_letter_frame.pack(pady=10)
+
+        # blue players selection label
+        self.blue_selection_label = tk.Label(blue_controls_frame, text="", bg="#008B8B", fg="#FFFAFA")
+        self.blue_selection_label.pack(pady=5)
 
     def create_board(self, size):
         pass
