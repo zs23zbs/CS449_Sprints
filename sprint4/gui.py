@@ -104,7 +104,7 @@ class SOSGame():
         # Highlight the selected letters to show which one is picked 
         if letter == "S":
             s_btn.config(bg="#0C530C", relief=tk.RAISED)
-            o_btn.conifg(bg="SystemButtonFace", relief=tk.SUNKEN)
+            o_btn.config(bg="SystemButtonFace", relief=tk.SUNKEN)
         else:
             s_btn.config(bg="SystemButtonFace", relief=tk.SUNKEN)
             o_btn.config(bg="#0C530C", relief=tk.RAISED)
@@ -195,7 +195,7 @@ class SOSGame():
 
         tk.Button(button_bottom_frame, text="REPLAY GAME", height=2, bg="#FFFAFA", command=self.reset_game).grid(row=0, column=0, padx=4, pady=4)
         tk.Button(button_bottom_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid(row=0, column=1, padx=4, pady=4)
-        tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_widow.destroy()).grid(row=0, column=2, padx=4, pady=4)
+        tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_window.destroy).grid(row=0, column=2, padx=4, pady=4)
         button_bottom_frame.pack(pady=10)
 
     def create_board(self, size):
