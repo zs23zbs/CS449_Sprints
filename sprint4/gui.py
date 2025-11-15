@@ -1,5 +1,6 @@
 import tkinter as tk
 from sos_logic import SimpleMode, GeneralMode
+from tkinter import messagebox
 
 class SOSGame():
     def __init__(self):
@@ -115,6 +116,12 @@ class SOSGame():
     def create_game_widgets(self):
         """Creates the game widgets in game window"""
 
+        # Turn Label
+        turn_frame = tk.Frame(self.game_window, bd=5, relief=tk.RAISED, bg="#20B2AA")
+        self.turn_label = tk.Label(turn_frame, text="....", font=("Helvetica", 16, "bold"), bg="#FFFAFA")
+        self.turn_label.pack(padx=5, pady=5)
+        turn_frame.pack(pady=10)
+
         # Game Mode Label 
         mode_frame  = tk.Frame(self.game_window, bd=3, relief=tk.RIDGE, bg="#008B8B")
         self.mode_label = tk.Label(mode_frame, text=f"Game Mode: {self.mode.get()}", font=("Helvetica", 14, "bold"), bg="#E0FFFF", fg="black")
@@ -126,7 +133,7 @@ class SOSGame():
         main_game_area_frame.pack(pady=10)
 
         # Red player Info
-        red_controls_frame = tk.Frame(self.main_game_area_frame, bg="#008B8B")
+        red_controls_frame = tk.Frame(main_game_area_frame, bg="#008B8B")
         red_controls_frame.grid(row=0, column=0, padx=20, pady=10, sticky=tk.N)
 
         red_frame = tk.Frame(red_controls_frame, bd=5, relief=tk.RIDGE, bg="red")
@@ -188,7 +195,7 @@ class SOSGame():
 
         tk.Button(button_bottom_frame, text="REPLAY GAME", height=2, bg="#FFFAFA", command=self.reset_game).grid(row=0, column=0, padx=4, pady=4)
         tk.Button(button_bottom_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid(row=0, column=1, padx=4, pady=4)
-        tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_widow_destroy).grid(row=0, column=2, padx=4, pady=4)
+        tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_widow.destroy()).grid(row=0, column=2, padx=4, pady=4)
         button_bottom_frame.pack(pady=10)
 
     def create_board(self, size):
@@ -224,10 +231,35 @@ class SOSGame():
         pass 
 
     def reset_game(self):
-        pass
+        """Reset the game"""
+
+        if self.game:
+            self.game.reset()
+        for row in self.board_buttons:
+            for button in row: 
+                button.config(text="", fg="black", bg="white")
+
+        self.set_letter_selection("Red", "S")
+        self.set_letter_selection("Blue", "S")
+        #self.update_turn_display()
 
     def end_game(self):
-        pass
+        """Determine the winner of the game"""
+        winner = self.game.determine_winner()
+
+        self.update_turn_display()
+
+        if winner == "Draw":
+            self.turn_label.config(text="GAME OVER: IT'S A DRAW!")
+            messagebox.showinfo("Game Over", f"The {self.mode.get()} has ended in a Draw!")
+        else:
+            self.turn_label.config(text=f"GAME OVER: {winner.upper()} WINS!")
+            messagebox.showinfo("Game Over", f"The {self.mode.get()} Winner is: {winner.upper()}!")
+            
+
+    def start_game_from_setup(self):
+        self.game_window.destroy()
+        SOSGame()
 
 if __name__ == "__main__":
     SOSGame()
