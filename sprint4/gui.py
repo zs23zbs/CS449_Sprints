@@ -228,7 +228,7 @@ class SOSGame():
                 self.board_buttons.append(row_buttons)
 
     """New/Major Changes for class methods (I probably need) to accommodate for Human and Computer Components"""
-    def handle_click(self, row, col):
+    def handle_clicks(self, row, col):
         pass
 
     def update_turn_display(self):

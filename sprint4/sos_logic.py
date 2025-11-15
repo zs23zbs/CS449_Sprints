@@ -133,7 +133,7 @@ class SimpleMode(SOSLogic):
 
 class GeneralMode(SOSLogic):
     def __init__(self, game_board_size, player_blue, player_red):
-        super().__init(game_board_size, player_blue, player_red)
+        super().__init__(game_board_size, player_blue, player_red)
         self.game_mode == "General Game"
     
     def check_game_over(self):
