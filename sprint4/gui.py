@@ -183,6 +183,15 @@ class SOSGame():
         self.blue_selection_label = tk.Label(blue_controls_frame, text="", bg="#008B8B", fg="#FFFAFA")
         self.blue_selection_label.pack(pady=5)
 
+        # Bottom Game widget buttons 
+        button_bottom_frame = tk.Frame(self.game_window, bd=5, relief=tk.RIDGE, bg="#008B8B")
+
+        tk.Button(button_bottom_frame, text="REPLAY GAME", height=2, bg="#FFFAFA", command=self.reset_game).grid(row=0, column=0, padx=4, pady=4)
+        tk.Button(button_bottom_frame, text="NEW GAME", height=2, bg="#FFFAFA", command=self.start_game_from_setup).grid(row=0, column=1, padx=4, pady=4)
+        tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_widow_destroy).grid(row=0, column=2, padx=4, pady=4)
+        button_bottom_frame.pack(pady=10)
+
+
     def create_board(self, size):
         pass
 
