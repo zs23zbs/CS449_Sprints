@@ -191,9 +191,34 @@ class SOSGame():
         tk.Button(button_bottom_frame, text="EXIT GAME", height=2, bg="#FFFAFA", command=self.game_widow_destroy).grid(row=0, column=2, padx=4, pady=4)
         button_bottom_frame.pack(pady=10)
 
-
     def create_board(self, size):
-        pass
+        """Making the button grid for the actual game board"""
+
+        # Set up the board game variables
+        self.board_buttons = []
+        self.canvas.delete("all")
+        self.canvas.update_idletasks()
+        cell_width = self.canvas.winfo_width() / size
+        cell_height = self.canvas.winfo_height() / size
+
+        # Create the board, and make the cells clickable 
+        for i in range(size):
+            row_buttons = []
+            for j in range(size):
+                button = tk.Button(
+                    master=self.canvas,
+                    text="",
+                    width=6, 
+                    height=3,
+                    bg="white",
+                    font=("Helvetica", 16, "bold"),
+                    command=lambda r=i,  c=j: self.handle_clicks(r,c))
+                
+                x_center = j * cell_width + cell_width / 2
+                y_center = i * cell_height + cell_height / 2
+                self.canvas.create_window(x_center, y_center, window=button, anchor=tk.CENTER)
+                row_buttons.append(button)
+                self.board_buttons.append(row_buttons)
 
     def draw_sos_line(self, lines_info): # will heavily refactor later 
         pass 
