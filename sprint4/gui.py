@@ -1,4 +1,5 @@
 import tkinter as tk
+from sos_logic import SimpleMode, GeneralMode
 
 class SOSGame():
     def __init__(self):
@@ -48,7 +49,42 @@ class SOSGame():
         start_frame.grid(row=5, column=0, columnspan=2, pady=10)
     
     def start_game(self):
-        pass
+        """Starting the game window after players enter settings for SOS Game"""
+
+        self.start_menu.destroy() # close the SOS setup menu 
+
+        # Create the game window after set up menu 
+        self.game_window = tk.Tk()
+        self.game_window.title("SOS Game Window")
+        self.game_window.config(bg="#008B8B")
+
+        # Get the board size players selected from spinbox
+        board_size = self.board_size.get() 
+
+        # Get the players 
+        red_player = self.red_letter_choice.get()
+        blue_player = self.blue_letter_choice.get()
+
+        # Determine the Game mode depending on what players have chosen 
+        game_mode = self.mode.get()
+
+        if game_mode == "Simple Game":
+            self.game = SimpleMode(board_size, blue_player, red_player)
+        else:
+            self.game = GeneralMode(board_size, blue_player, red_player)
+
+        # set the the game board and widgets 
+        self.board_buttons = []
+        self.create_game_widgets()
+        self.create_board(board_size)
+
+        # update the letter selection 
+        self.set_letter_selection("Red", self.red_letter_choice.get())
+        self.set_letter_selection("Blue", self.blue_letter_choice.get())
+        self.update_turn_display()
+
+        self.game_window.mainloop()
+        
 
     def set_letter_selection (self, player_color, letter):
         pass

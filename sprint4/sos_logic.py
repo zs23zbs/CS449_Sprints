@@ -12,7 +12,7 @@ class SOSLogic(ABC):
         self.player_blue = player_blue 
         self.player_red = player_red
         self.current_turn = player_blue 
-        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # sets the initial score to zero 
+        self.score_count = {self.player_blue : 0, self.player_red: 0} # sets the initial score to zero 
     
         self.is_game_over = False
         self.game_mode = ""
@@ -108,8 +108,8 @@ class SOSLogic(ABC):
         self.is_game_over = False
 
 class SimpleMode(SOSLogic):
-    def __init__(self, game_board_size):
-        super().__init__(game_board_size)
+    def __init__(self, game_board_size, player_blue, player_red):
+        super().__init__(game_board_size, player_blue, player_red)
         self.game_mode == "Simple Game"
 
     def check_game_over(self):
@@ -132,8 +132,8 @@ class SimpleMode(SOSLogic):
         return "Draw"
 
 class GeneralMode(SOSLogic):
-    def __init__(self, game_board_size):
-        super().__init(game_board_size)
+    def __init__(self, game_board_size, player_blue, player_red):
+        super().__init(game_board_size, player_blue, player_red)
         self.game_mode == "General Game"
     
     def check_game_over(self):
