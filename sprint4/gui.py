@@ -256,7 +256,6 @@ class SOSGame():
             self.turn_label.config(text=f"GAME OVER: {winner.upper()} WINS!")
             messagebox.showinfo("Game Over", f"The {self.mode.get()} Winner is: {winner.upper()}!")
             
-
     def start_game_from_setup(self):
         self.game_window.destroy()
         SOSGame()
