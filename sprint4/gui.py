@@ -227,8 +227,21 @@ class SOSGame():
                 row_buttons.append(button)
                 self.board_buttons.append(row_buttons)
 
-    def draw_sos_line(self, lines_info): # will heavily refactor later 
-        pass 
+    """New/Major Changes for class methods (I probably need) to accommodate for Human and Computer Components"""
+    def handle_click(self, row, col):
+        pass
+
+    def update_turn_display(self):
+        pass
+
+    def update_player_controls(self):
+        pass
+
+    def process_visual_updates(updates_list):
+        pass
+
+    def computer_move_sequence(self):
+        pass
 
     def reset_game(self):
         """Reset the game"""
@@ -241,7 +254,7 @@ class SOSGame():
 
         self.set_letter_selection("Red", "S")
         self.set_letter_selection("Blue", "S")
-        #self.update_turn_display()
+        self.update_turn_display()
 
     def end_game(self):
         """Determine the winner of the game"""
