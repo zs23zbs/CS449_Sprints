@@ -105,7 +105,7 @@ class SOSGame():
     def create_game_widgets(self):
          # turn label 
         turn_frame = tk.Frame(self.game_window, bd=5, relief=tk.RAISED, bg="#20B2AA")
-        self.turn_label = tk.Label(turn_frame, text="", font=("Helvetica", 16, "bold"), bg="#FFFAFA")
+        self.turn_label = tk.Label(turn_frame, text="....", font=("Helvetica", 16, "bold"), bg="#FFFAFA")
         self.turn_label.pack(padx=5, pady=5)
         turn_frame.pack(pady=10)
 
@@ -128,13 +128,11 @@ class SOSGame():
         red_frame.pack(pady=10)
         
         red_letter_frame = tk.Frame(red_controls_frame, bd=5, relief=tk.RAISED, bg="#20B2AA")
-        tk.Label(red_letter_frame, text="Select Move:", bg="#FFFAFA", fg="black").pack(side=tk.TOP, padx=5, pady=5)
+        tk.Label(red_letter_frame, text="Selected Move:", bg="#FFFAFA", fg="black").pack(side=tk.TOP, padx=5, pady=5)
         
         # red players toggle button
-        self.red_s_button = tk.Button(red_letter_frame, text="S", width=4,
-                                        command=lambda: self.set_letter_selection("Red", "S"))
-        self.red_o_button = tk.Button(red_letter_frame, text="O", width=4,
-                                        command=lambda: self.set_letter_selection("Red", "O"))
+        self.red_s_button = tk.Button(red_letter_frame, text="S", width=4,command=lambda: self.set_letter_selection("Red", "S"))
+        self.red_o_button = tk.Button(red_letter_frame, text="O", width=4,command=lambda: self.set_letter_selection("Red", "O"))
         
         self.red_s_button.pack(side=tk.LEFT, padx=5)
         self.red_o_button.pack(side=tk.LEFT, padx=5)

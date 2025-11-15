@@ -113,7 +113,49 @@ class SOSGame():
             display_labels.config(text=f"Selected Letter: {letter}", font=("Helvetica", 12, "bold"))
 
     def create_game_widgets(self):
-        pass
+        """Creates the game widgets in game window"""
+
+        # Game Mode Label 
+        mode_frame  = tk.Frame(self.game_window, bd=3, relief=tk.RIDGE, bg="#008B8B")
+        self.mode_label = tk.Label(mode_frame, text=f"Game Mode: {self.mode.get()}", font=("Helvetica", 14, "bold"), bg="#E0FFFF", fg="black")
+        self.mode_label.pack(padx=5, pady=3)
+        mode_frame.pack(pady=5)
+
+        # Creating the frame for the game area
+        main_game_area_frame = tk.Frame(self.game_window, bg="#008B8B")
+        main_game_area_frame.pack(pady=10)
+
+        # Red player Info
+        red_controls_frame = tk.Frame(self.main_game_area_frame, bg="#008B8B")
+        red_controls_frame.grid(row=0, column=0, padx=20, pady=10, sticky=tk.N)
+
+        red_frame = tk.Frame(red_controls_frame, bd=5, relief=tk.RIDGE, bg="red")
+        self.red_label = tk.Label(red_frame, text="", bg="#E9967A", fg="black", font=("Helvetica", 14, "bold"))
+        self.red_label.pack(padx=10, pady=5)
+        red_frame.pack(pady=10)
+
+        red_letter_frame = tk.Frame(red_controls_frame, bd=5, relief=tk.RIDGE, bg="#20B2AA")
+        tk.Label(red_letter_frame, text="Selected Move:", bg="#FFFAFA", fg="black").pack(side=tk.TOP, padx=5, pady=5)
+
+        # Red Player toggle buttons for S or O 
+        self.red_s_button = tk.Button(red_letter_frame, text="S", width=4, command=lambda: self.set_letter_selection("Red", "S"))
+        self.red_o_button = tk.Button(red_letter_frame, text="O", width=4, command=lambda: self.set_letter_selection("Red", "O"))
+
+        self.red_s_button.pack(side=tk.LEFT, padx=5)
+        self.red_o_button.pack(side=tk.LEFT, padx=5)
+        red_letter_frame.pack(pady=10)
+
+        # red players selection label 
+        self.red_selection_label = tk.Label(red_controls_frame, text="", bg="#008B8B", fg="#FFFAFA")
+        self.red_selection_label.pack(pady=5)
+
+        # Creating the game board itself
+        self.board_container = tk.Frame(main_game_area_frame, bg="lightblue", bd=5, relief=tk.RIDGE)
+        self.board_container.grid(row=0, column=1, padx=20, pady=10)
+
+
+
+
 
     def create_board(self, size):
         pass
