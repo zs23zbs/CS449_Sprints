@@ -85,9 +85,32 @@ class SOSGame():
 
         self.game_window.mainloop()
         
-
     def set_letter_selection (self, player_color, letter):
-        pass
+        """Sets the letters to players with toggle"""
+
+        # Set the S and O letters to the right players 
+        if player_color == "Red":
+            self.red_letter_choice.set(letter)
+            s_btn = self.red_s_button
+            o_btn = self.red_o_button
+            display_labels = self.red_selection_label
+        else:
+            self.blue_letter_choice.set(letter)
+            s_btn = self.blue_s_button
+            o_btn = self.blue_o_button
+            display_labels = self.blue_selection_label
+
+        # Highlight the selected letters to show which one is picked 
+        if letter == "S":
+            s_btn.config(bg="#0C530C", relief=tk.RAISED)
+            o_btn.conifg(bg="SystemButtonFace", relief=tk.SUNKEN)
+        else:
+            s_btn.config(bg="SystemButtonFace", relief=tk.SUNKEN)
+            o_btn.config(bg="#0C530C", relief=tk.RAISED)
+
+        # Visually display the selected letter
+        if display_labels:
+            display_labels.config(text=f"Selected Letter: {letter}", font=("Helvetica", 12, "bold"))
 
     def create_game_widgets(self):
         pass
