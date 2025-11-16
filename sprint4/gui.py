@@ -309,10 +309,38 @@ class SOSGame():
                 set_the_control_state(self.blue_s_button, self.blue_o_button, True)
 
     def process_visual_updates(self, row, col, letter, color, found_sos):
-        pass
+        """Updates the GUI game board and drawing SOS lines  """
 
-    def draw_sos_line(self):
-        pass
+        # makes sure that button this position is updated
+        if self.board_buttons and 0 <= row < len(self.board_buttons) and 0 <= col < len(self.board_buttons[0]):
+            self.board_buttons[row][col].config(text=letter, fg="black", state=tk.DISABLED)
+
+        for start_coords, _, end_coords in found_sos: 
+            self.draw_sos_line(start_coords, end_coords, color.lower())
+
+        if self.game.is_game_over:
+            self.end_game()
+
+    def draw_sos_line(self, point1, point3, line_color):
+        """ Draws a line over sos pattern connecting the start (point1) and the end (point3)"""
+
+        size = self.game.board.board_size
+
+        # set the cell widths and height 
+        self.canvas.update_idletasks()
+        cell_width = self.canvas.winfo_width() / size
+        cell_height = self.canvas.winfo_height() / size
+        
+        point1_center_x = point1[1] * cell_width + cell_width / 2
+        point1_center_y = point1[0] * cell_height + cell_height / 2
+
+        point3_center_x = point3[1] * cell_width + cell_width / 2
+        point3_center_y = point3[0] * cell_height + cell_height / 2
+
+        # attempting to draw the scored sos line 
+        self.canvas.create_line(point1_center_x, point1_center_y,
+                                point3_center_x, point3_center_y,
+                                fill=line_color, width=5)
 
     def computer_move_sequence(self):
         pass
