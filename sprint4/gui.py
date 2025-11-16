@@ -1,6 +1,6 @@
 import tkinter as tk
 from sos_logic import SimpleMode, GeneralMode
-from player_class import HumanPlayer
+from player_class import HumanPlayer, ComputerPlayer
 from tkinter import messagebox
 
 class SOSGame():
@@ -243,10 +243,29 @@ class SOSGame():
         if not isinstance(current_player_before_move, HumanPlayer):
             return None 
         
+        # Set the color letter to whoever is the current player during turn 
         if current_player_before_move == "Red":
             letter = self.red_letter_choice.get()
         else: 
             letter = self.blue_letter_choice.get()
+
+        success, found_sos = self.game.making_move(row, col, letter)
+
+        # if the move was successful, visually update the game state
+        if success: 
+            self.process_visual_updates(row, col, letter, current_player_before_move.color, found_sos)
+
+            if not self.game.is_game_over:
+                self.update_turn_display()
+                self.update_player_controls()
+
+                current_player_before_move = self.game.current_turn
+
+                # start the computers move sequence with a slight delay 
+                if isinstance(current_player_before_move, ComputerPlayer):
+                    self.game_window.after(60, self.computer_move_sequence)
+        else: 
+            messagebox.showerror("Invalid Move!", "Selected CELL is occupied!")
 
     def update_turn_display(self):
         pass
@@ -254,10 +273,10 @@ class SOSGame():
     def update_player_controls(self):
         pass
 
-    def process_visual_updates(updates_list):
+    def process_visual_updates(self, row, col, letter, color, found_sos):
         pass
 
-    def draw_sos_line(self, row, col, letter, color, found_sos):
+    def draw_sos_line(self):
         pass
 
     def computer_move_sequence(self):
