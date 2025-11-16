@@ -293,7 +293,7 @@ class SOSGame():
 
         # function to disable player controls 
         def set_the_control_state(s_btn, o_btn, enable):
-            state = tk.NORMAL if enable and not self.game.is_game_over else tk.DISABLED # deliberately contorls the players interactions during each turns 
+            state = tk.NORMAL if enable and not self.game.is_game_over else tk.DISABLED # deliberately controls the players interactions during each turns 
             s_btn.config(state=state)
             o_btn.config(state=state)
         
@@ -301,7 +301,12 @@ class SOSGame():
         set_the_control_state(self.red_s_button, self.red_o_button, False)
         set_the_control_state(self.blue_s_button, self.blue_o_button, False)
 
-        # E
+        # Enable the controls ONLY for the Human player 
+        if isinstance(current_player, HumanPlayer) and not self.game.is_game_over:
+            if current_player == "Red":
+                set_the_control_state(self.red_s_button, self.red_o_button, True)
+            else:
+                set_the_control_state(self.blue_s_button, self.blue_o_button, True)
 
     def process_visual_updates(self, row, col, letter, color, found_sos):
         pass
