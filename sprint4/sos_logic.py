@@ -83,7 +83,7 @@ class SOSLogic(ABC):
         else: 
             self.current_turn = self.player_blue
 
-    def reset_board(self):
+    def reset(self):
         """Resets the game board"""
         self.board.reset() # reset the game board 
         self.current_turn = self.player_blue # automatically set the current player to blue 
@@ -95,7 +95,7 @@ class SOSLogic(ABC):
 class SimpleMode(SOSLogic):
     def __init__(self, game_board_size, player_blue, player_red):
         super().__init__(game_board_size, player_blue, player_red)
-        self.game_mode == "Simple Game"
+        self.game_mode = "Simple Game"
 
     def check_game_over(self):
         """Game is over the board is full"""
@@ -119,11 +119,11 @@ class SimpleMode(SOSLogic):
 class GeneralMode(SOSLogic):
     def __init__(self, game_board_size, player_blue, player_red):
         super().__init__(game_board_size, player_blue, player_red)
-        self.game_mode == "General Game"
+        self.game_mode = "General Game"
     
     def check_game_over(self):
         """Game is over the board is full or players have the same score"""
-        if self.score_count["Red"] == self.score_count["Blue"] or self.board.is_full():
+        if self.board.is_full():
             self.is_game_over = True 
     
     def determine_winner(self):

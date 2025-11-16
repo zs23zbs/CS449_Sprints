@@ -69,7 +69,7 @@ class SOSGame():
 
         # Blue player type controls
         blue_type_frame = tk.Frame(player_type_frame, bd=5, relief=tk.RAISED, bg="#1E90FF")
-        tk.Label(blue_type_frame, text="Red Player:", font=("Helvetica", 10, "bold"), bg="#1E90FF").pack()
+        tk.Label(blue_type_frame, text="Blue Player:", font=("Helvetica", 10, "bold"), bg="#1E90FF").pack()
         tk.Radiobutton(blue_type_frame, text="Human", variable=self.blue_player_type, value="Human", bg="#1E90FF").pack(anchor=tk.W)
         tk.Radiobutton(blue_type_frame, text="Computer", variable=self.blue_player_type, value="Computer", bg="#1E90FF").pack(anchor=tk.W)
         blue_type_frame.grid(row=0, column=1, padx=10)
@@ -210,7 +210,7 @@ class SOSGame():
         # Configure the size of game board  
         size = (self.board_size.get()) * 75
         
-        self.canvas = tk.Canvas(self.board_container, width=size, bg="white", highlightthickness=0)
+        self.canvas = tk.Canvas(self.board_container, width=size, height=size, bg="white", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
 
         # Blue player Info
@@ -274,9 +274,9 @@ class SOSGame():
                 
                 x_center = j * cell_width + cell_width / 2
                 y_center = i * cell_height + cell_height / 2
-                self.canvas.create_window(x_center, y_center, window=button, anchor=tk.CENTER)
+                self.canvas.create_window(x_center, y_center, window=button, anchor=tk.CENTER, width=cell_width, height=cell_height)
                 row_buttons.append(button)
-                self.board_buttons.append(row_buttons)
+            self.board_buttons.append(row_buttons)
 
     """New/Major Changes for class methods (I probably need) to accommodate for Human and Computer Components"""
     def handle_clicks(self, row, col):

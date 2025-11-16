@@ -50,10 +50,7 @@ class ComputerPlayer(Player):
                         board.unplace(row, col) # CORRECTLY remove the temporary move
                         if len(lines) > 0: 
                             return (row, col, letter)
-
-                    available_moves.append((row, col, "S"))
-                    available_moves.append((row, col, "O"))
-
+                        
         # Random strategy 
         for row in range(board.board_size):
             for col in range(board.board_size):
@@ -65,4 +62,4 @@ class ComputerPlayer(Player):
             computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
             return computer_move
         else:
-            return None 
+            return None
