@@ -362,7 +362,6 @@ class SOSGame():
         # Schedule move with a delay 
         self.game_window.after(700, self.execute_computer_moves)
 
-
     def execute_computer_moves(self):
         """Execute the computers turn with a delay"""
 
@@ -404,6 +403,7 @@ class SOSGame():
 
         if self.game:
             self.game.reset()
+            
         for row in self.board_buttons:
             for button in row: 
                 button.config(text="", fg="black", bg="white")

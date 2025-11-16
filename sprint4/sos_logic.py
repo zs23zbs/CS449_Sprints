@@ -110,11 +110,11 @@ class SimpleMode(SOSLogic):
         blue_score = self.score_count["Blue"]
 
         if red_score > 0 and blue_score == 0: 
-            return self.player_red.color # red is the winner
+            return "Red" # red is the winner
         elif blue_score > 0 and red_score == 0: 
-            return self.player_blue.color # blue is the winner 
+            return "Blue" # blue is the winner 
         
-        # no one scored
+        # no one or both scored
         return "Draw"
 
 class GeneralMode(SOSLogic):
@@ -134,8 +134,8 @@ class GeneralMode(SOSLogic):
         blue_score = self.score_count["Blue"]
 
         if red_score > blue_score: # if red scores more 
-            return self.player_red.color # red wins
+            return "Red" # red wins
         elif blue_score > red_score: # if blue scores more 
-            return self.player_blue.color # blue wins
+            return "Blue" # blue wins
         
         return "Draw" # if niether condition works 
