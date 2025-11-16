@@ -439,7 +439,11 @@ class SOSGame():
             messagebox.showinfo("Game Over", f"The {self.mode.get()} WINNER is: {winner_color.upper()}!\nFINAL SCORE: BLUE {blue_score} || RED {red_score}")
             
     def start_game_from_setup(self):
-        self.game_window.destroy()
+        """Exits the current game window and reopens the setup menu"""
+        
+        if self.game_window:
+            self.game_window.destroy()
+            
         SOSGame()
 
 if __name__ == "__main__":
