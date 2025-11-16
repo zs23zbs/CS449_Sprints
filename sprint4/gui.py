@@ -240,6 +240,9 @@ class SOSGame():
     def process_visual_updates(updates_list):
         pass
 
+    def draw_sos_line(self, row, col, letter, color, found_sos):
+        pass
+
     def computer_move_sequence(self):
         pass
 
