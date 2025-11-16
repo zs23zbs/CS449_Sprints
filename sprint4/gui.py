@@ -364,7 +364,40 @@ class SOSGame():
 
 
     def execute_computer_moves(self):
-        pass
+        """Execute the computers turn with a delay"""
+
+        # still check if game has ended while waiting for the delay 
+        if self.game.is_game_over or not isinstance(self.game.current_turn, ComputerPlayer):
+            self.update_player_controls()
+            return None
+        
+        current_player = self.game.current_turn
+
+        computer_move = current_player.get_move(self.game.board)
+
+        # if it's the computers turn to make a move
+        if computer_move:
+            row, col, letter = computer_move # unpack the tuple of the computer's move 
+            
+            success, found_sos = self.game.making_move(row, col, letter)
+
+            # if the move, on computers turn was a success
+            if success:
+                self.process_visual_updates(row, col, letter, current_player.color, found_sos)
+                self.update_turn_display()
+                self.update_player_controls()
+
+                # Checks the game state after computer move was done
+                # if still computers move (aka General Mode or Computer vs Computer)
+                # schedule the next computer move immeidately 
+                if not self.game.is_game_over and isinstance(self.game.current_turn, ComputerPlayer):
+                    self.computer_move_sequence()
+
+                # otherwise if the turn went to the human playe , exit methods and gui will wait for the human player to make a move
+            else:
+                self.end_game()
+        else:
+            self.end_game()
 
     def reset_game(self):
         """Reset the game"""
