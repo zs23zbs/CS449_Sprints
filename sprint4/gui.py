@@ -287,7 +287,21 @@ class SOSGame():
         self.turn_label.config(text=turn_text)
 
     def update_player_controls(self):
-        pass
+        """Keeps each players controls in check while opposing player makes a move"""
+
+        current_player = self.game.current_turn
+
+        # function to disable player controls 
+        def set_the_control_state(s_btn, o_btn, enable):
+            state = tk.NORMAL if enable and not self.game.is_game_over else tk.DISABLED # deliberately contorls the players interactions during each turns 
+            s_btn.config(state=state)
+            o_btn.config(state=state)
+        
+        # Default setting, disable the controls for both player controls 
+        set_the_control_state(self.red_s_button, self.red_o_button, False)
+        set_the_control_state(self.blue_s_button, self.blue_o_button, False)
+
+        # E
 
     def process_visual_updates(self, row, col, letter, color, found_sos):
         pass
