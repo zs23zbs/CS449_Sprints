@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 
 # Might need to refactor later, depending on GUI  
 
-
 class SOSLogic(ABC):
     def __init__(self, game_board_size, player_blue, player_red):
         """Initialize instance for logic of game"""

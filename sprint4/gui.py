@@ -401,16 +401,22 @@ class SOSGame():
     def reset_game(self):
         """Reset the game"""
 
+        # reset the game state 
         if self.game:
             self.game.reset()
-            
-        for row in self.board_buttons:
-            for button in row: 
-                button.config(text="", fg="black", bg="white")
 
+        # redraw the game board & destroy old buttons + create new ones
+        if self.game_window and self.game: 
+            self.create_board(self.game.board.board_size)
+
+        # update the user interface buttons/elements
         self.set_letter_selection("Red", "S")
         self.set_letter_selection("Blue", "S")
         self.update_turn_display()
+        self.update_player_controls()
+
+        # this starts the computer move seuwnce if the game setting starts with the computer turn to go first 
+        self.game_window.after(700, self.computer_move_sequence)
 
     def end_game(self):
         """Determine the winner of the game"""
