@@ -22,7 +22,7 @@ class SOSGame():
 
         # To start with for letter choices
         self.red_letter_choice = tk.StringVar(value="S")
-        self.blue_letter_choice = tk.StringVar(value="s")
+        self.blue_letter_choice = tk.StringVar(value="S")
         self.red_selection_label = None
         self.blue_selection_label = None
 
@@ -158,7 +158,7 @@ class SOSGame():
 
         # Visually display the selected letter
         if display_labels:
-            display_labels.config(text=f"Selected Letter: {letter}", font=("Helvetica", 12, "bold"))
+            display_labels.config(text=f"Selected Letter: {letter}")
 
     def create_game_widgets(self):
         """Creates the game widgets in game window"""
@@ -255,6 +255,10 @@ class SOSGame():
         cell_width = self.canvas.winfo_width() / size
         cell_height = self.canvas.winfo_height() / size
 
+        for widget in self.canvas.winfo_children():
+            if isinstance(widget, tk.Button):
+                widget.destroy()
+
         # Create the board, and make the cells clickable 
         for i in range(size):
             row_buttons = []
@@ -290,7 +294,7 @@ class SOSGame():
             return None 
         
         # Set the color letter to whoever is the current player during turn 
-        if current_player_before_move == "Red":
+        if current_player_before_move.color == "Red":
             letter = self.red_letter_choice.get()
         else: 
             letter = self.blue_letter_choice.get()
@@ -324,7 +328,7 @@ class SOSGame():
             # Game is over, so turn label is updated in end_game() 
             return None
         
-        current_player_color = self.game.current_player.color
+        current_player_color = self.game.current_turn.color
 
         # Creates the text labels to keep track of each players scores during game 
         turn_text = f"Current Turn: {current_player_color}\n"
@@ -349,7 +353,7 @@ class SOSGame():
 
         # Enable the controls ONLY for the Human player 
         if isinstance(current_player, HumanPlayer) and not self.game.is_game_over:
-            if current_player == "Red":
+            if current_player.color == "Red":
                 set_the_control_state(self.red_s_button, self.red_o_button, True)
             else:
                 set_the_control_state(self.blue_s_button, self.blue_o_button, True)

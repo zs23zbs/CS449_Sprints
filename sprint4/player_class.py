@@ -55,6 +55,12 @@ class ComputerPlayer(Player):
                     available_moves.append((row, col, "O"))
 
         # Random strategy 
+        for row in range(board.board_size):
+            for col in range(board.board_size):
+                if board.is_cell_empty(row, col):
+                    available_moves.append((row, col, "S"))
+                    available_moves.append((row, col, "O"))
+       
         if available_moves:
             computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
             return computer_move
