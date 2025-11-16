@@ -130,6 +130,12 @@ class SOSGame():
     def set_letter_selection (self, player_color, letter):
         """Sets the letters to players with toggle"""
 
+        # ONLY set if the current player is human 
+        if self.game and player_color == "Red" and not isinstance(self.game.player_red, HumanPlayer):
+            return None
+        if self.game and player_color == "Blue" and not isinstance(self.game.player_blue, HumanPlayer):
+            return None
+
         # Set the S and O letters to the right players 
         if player_color == "Red":
             self.red_letter_choice.set(letter)
