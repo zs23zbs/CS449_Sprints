@@ -16,11 +16,19 @@ class SOSGame():
         self.board_size = tk.IntVar(value=3) # default/smallest board size
         self.mode = tk.StringVar(value="Simple Game") # default game mode
 
+        # For the player type (Human or Computer) selection variables 
+        self.blue_player_type = tk.StringVar(value="Human")
+        self.red_player_type = tk.StringVar(value="Computer")
+
         # To start with for letter choices
         self.red_letter_choice = tk.StringVar(value="S")
-        self.blue_letter_choice = tk.StringVar(value="O")
+        self.blue_letter_choice = tk.StringVar(value="s")
         self.red_selection_label = None
         self.blue_selection_label = None
+
+        # For the game lgoic instances
+        self.game = None
+        self.game_window = None 
         
         # immediately straight to start menu
         self.create_start_menu()
@@ -28,6 +36,9 @@ class SOSGame():
 
     def create_start_menu(self):
         """Setting up the start menu buttons """
+
+        for widget in self.start_menu.winfo_children():
+            widget.destroy()
 
         # Creating the title of the start menu 
         title = tk.Label(self.start_menu, text="SOS Game Setup", font=("Helvetica", 16, "bold"), bg="#008B8B", fg="#FFFAFA")
@@ -44,6 +55,28 @@ class SOSGame():
         tk.Label(mode_frame, text="Game Mode:", bg="#FFFAFA", fg="black").grid(row=0,column=0, padx=5,pady=5)
         tk.OptionMenu(mode_frame, self.mode, "Simple Game", "General Game").grid(row=0, column=1, padx=5, pady=5)
         mode_frame.grid(row=2, column=0, columnspan=2, pady=5)
+
+        # Plyaer Type Selections 
+        player_type_frame = tk.Frame(self.start_menu, bg="#008B8B")
+        player_type_frame.grid(row=3, column=0, columnspan=3, pady=10)
+
+        # Red player type controls
+        red_type_frame = tk.Frame(player_type_frame, bd=5, relief=tk.RAISED, bg="#E9967A")
+        tk.Label(red_type_frame, text="Red Player:", font=("Helvetica", 10, "bold"), bg="#E9967A").pack()
+        tk.Radiobutton(red_type_frame, text="Human", variable=self.red_player_type, value="Human", bg="#E9967A").pack(anchor=tk.W)
+        tk.Radiobutton(red_type_frame, text="Computer", variable=self.red_player_type, value="Computer", bg="#E9967A").pack(anchor=tk.W)
+        red_type_frame.grid(row=0, column=0, padx=10)
+
+        # Blue player type controls
+        blue_type_frame = tk.Frame(player_type_frame, bd=5, relief=tk.RAISED, bg="#1E90FF")
+        tk.Label(blue_type_frame, text="Red Player:", font=("Helvetica", 10, "bold"), bg="#1E90FF").pack()
+        tk.Radiobutton(blue_type_frame, text="Human", variable=self.blue_player_type, value="Human", bg="#1E90FF").pack(anchor=tk.W)
+        tk.Radiobutton(blue_type_frame, text="Computer", variable=self.blue_player_type, value="Computer", bg="#1E90FF").pack(anchor=tk.W)
+        blue_type_frame.grid(row=0, column=1, padx=10)
+
+
+
+
 
         # Making the Start Game Button
         start_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RIDGE, bg="#008B8B")
