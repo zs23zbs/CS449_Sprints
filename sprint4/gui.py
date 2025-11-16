@@ -1,5 +1,6 @@
 import tkinter as tk
 from sos_logic import SimpleMode, GeneralMode
+from player_class import HumanPlayer
 from tkinter import messagebox
 
 class SOSGame():
@@ -229,7 +230,23 @@ class SOSGame():
 
     """New/Major Changes for class methods (I probably need) to accommodate for Human and Computer Components"""
     def handle_clicks(self, row, col):
-        pass
+        """Handles the clicks or events for Human Player on the game board"""
+
+        # Display a message for when the game is over 
+        if self.game.is_game_over:
+            messagebox.showinfo("GAME OVER!", "The SOS Game has ended. Please select NEW GAME, REPLAY GAME, or EXIT GAME")
+            return None
+        
+        current_player_before_move = self.game.current_turn
+
+        # Current players clicks go through ONLY if current player is the human player 
+        if not isinstance(current_player_before_move, HumanPlayer):
+            return None 
+        
+        if current_player_before_move == "Red":
+            letter = self.red_letter_choice.get()
+        else: 
+            letter = self.blue_letter_choice.get()
 
     def update_turn_display(self):
         pass
