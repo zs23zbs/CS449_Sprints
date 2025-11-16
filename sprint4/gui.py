@@ -268,7 +268,23 @@ class SOSGame():
             messagebox.showerror("Invalid Move!", "Selected CELL is occupied!")
 
     def update_turn_display(self):
-        pass
+        """Updates turn labels and scores"""
+
+        # Get the scores for each player 
+        red_score = self.game.score_count.get("Red", 0)
+        blue_score = self.game.score_count.get("Blue", 0)
+
+        if self.game.is_game_over:
+            # Game is over, so turn label is updated in end_game() 
+            return None
+        
+        current_player_color = self.game.current_player.color
+
+        # Creates the text labels to keep track of each players scores during game 
+        turn_text = f"Current Turn: {current_player_color}\n"
+        turn_text += f"Blue Score: {blue_score} || Red Score: {red_score}"
+
+        self.turn_label.config(text=turn_text)
 
     def update_player_controls(self):
         pass
