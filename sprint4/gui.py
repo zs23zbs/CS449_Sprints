@@ -343,6 +343,27 @@ class SOSGame():
                                 fill=line_color, width=5)
 
     def computer_move_sequence(self):
+        """Schedules the conputer to takes its turns with a delay"""
+
+        if self.game.is_game_over:
+            self.end_game()
+            return None
+        
+        current_player = self.game.current_turn
+
+        # only human player controls are enabled if its noth the computers turn 
+        if not isinstance(current_player, ComputerPlayer):
+            self.update_player_controls() # this ensures that ONLY the human controls are enabled 
+            return None
+        
+        # go here, computers turns
+        self.update_player_controls() # disable human controls
+
+        # Schedule move with a delay 
+        self.game_window.after(700, self.execute_computer_moves)
+
+
+    def execute_computer_moves(self):
         pass
 
     def reset_game(self):
