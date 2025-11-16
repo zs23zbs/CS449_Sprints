@@ -200,7 +200,7 @@ class SOSGame():
         red_letter_frame.pack(pady=10)
 
         # red players selection label 
-        self.red_selection_label = tk.Label(red_controls_frame, text="", bg="#008B8B", fg="#FFFAFA")
+        self.red_selection_label = tk.Label(red_controls_frame, text=f"Selected Letter: {self.red_letter_choice.get()}", bg="#008B8B", fg="#FFFAFA")
         self.red_selection_label.pack(pady=5)
 
         # Creating the game board itself
@@ -234,7 +234,7 @@ class SOSGame():
         blue_letter_frame.pack(pady=10)
 
         # blue players selection label
-        self.blue_selection_label = tk.Label(blue_controls_frame, text="", bg="#008B8B", fg="#FFFAFA")
+        self.blue_selection_label = tk.Label(blue_controls_frame, text=f"Selected Letter: {self.blue_letter_choice.get()}", bg="#008B8B", fg="#FFFAFA")
         self.blue_selection_label.pack(pady=5)
 
         # Bottom Game widget buttons 
