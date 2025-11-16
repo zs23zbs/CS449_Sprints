@@ -25,6 +25,11 @@ class Board():
 
         return True 
 
+    def unplace(self, row, col):
+        """Remove the content of a cell, make it empty again"""
+        if 0 <= row < self.board_size and 0 <= col < self.board_size:
+            self.game_board[row][col] = None # makes the once occupied cell , empty aka None
+
     def get_letter(self, row, col):
         """Returns the letter (S or O) from a cell or None"""
         if 0 <= row < self.board_size and 0 <= col < self.board_size:
