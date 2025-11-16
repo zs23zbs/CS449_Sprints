@@ -74,10 +74,6 @@ class SOSGame():
         tk.Radiobutton(blue_type_frame, text="Computer", variable=self.blue_player_type, value="Computer", bg="#1E90FF").pack(anchor=tk.W)
         blue_type_frame.grid(row=0, column=1, padx=10)
 
-
-
-
-
         # Making the Start Game Button
         start_frame = tk.Frame(self.start_menu, bd=5, relief=tk.RIDGE, bg="#008B8B")
         tk.Button(start_frame, text="Start SOS Game", height=2, bg="#FFFAFA", fg="black", command=self.start_game).grid(row=0, column=0, padx=5, pady=5)
@@ -97,8 +93,11 @@ class SOSGame():
         board_size = self.board_size.get() 
 
         # Get the players 
-        red_player = self.red_letter_choice.get()
-        blue_player = self.blue_letter_choice.get()
+        red_type = self.red_player_type.get()
+        blue_type = self.blue_player_type.get()
+
+        red_player = HumanPlayer("Red") if red_type == "Human" else ComputerPlayer("Red")
+        blue_player = HumanPlayer("Blue") if blue_type == "Human" else ComputerPlayer("Blue")
 
         # Determine the Game mode depending on what players have chosen 
         game_mode = self.mode.get()
@@ -113,10 +112,18 @@ class SOSGame():
         self.create_game_widgets()
         self.create_board(board_size)
 
-        # update the letter selection 
+        # updates the pkayer labels to show type (Human or computer)
+        self.red_label.config(text=f"Red Player ({red_type})")
+        self.blue_label.config(text=f"Blue Player ({blue_type})")
+
+        # update the letter selection display
         self.set_letter_selection("Red", self.red_letter_choice.get())
         self.set_letter_selection("Blue", self.blue_letter_choice.get())
         self.update_turn_display()
+        self.update_player_controls()
+
+        # starts the computer seuqnce if the current player is now the computer + add a short delaye for rendering 
+        self.game_window.after(100, self.computer_move_sequence)
 
         self.game_window.mainloop()
         
