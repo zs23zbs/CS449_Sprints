@@ -423,13 +423,20 @@ class SOSGame():
         winner = self.game.determine_winner()
 
         self.update_turn_display()
+        self.update_player_controls()
 
-        if winner == "Draw":
-            self.turn_label.config(text="GAME OVER: IT'S A DRAW!")
-            messagebox.showinfo("Game Over", f"The {self.mode.get()} has ended in a Draw!")
+        winner_color = self.game.determine_winner()
+        mode = self.game.game_mode
+
+        red_score = self.game.score_count.get("Red", 0)
+        blue_score = self.game.score_count.get("Blue", 0)
+
+        if winner_color == "Draw":
+            self.turn_label.config(text=f"GAME OVER: IT'S A DRAW! ({mode})")
+            messagebox.showinfo("Game Over", f"The {mode} has ended in a DRAW!\nFINAL SCORE: BLUE {blue_score} || RED {red_score}")
         else:
-            self.turn_label.config(text=f"GAME OVER: {winner.upper()} WINS!")
-            messagebox.showinfo("Game Over", f"The {self.mode.get()} Winner is: {winner.upper()}!")
+            self.turn_label.config(text=f"GAME OVER: {winner_color.upper()} WINS! ({mode})")
+            messagebox.showinfo("Game Over", f"The {self.mode.get()} WINNER is: {winner_color.upper()}!\nFINAL SCORE: BLUE {blue_score} || RED {red_score}")
             
     def start_game_from_setup(self):
         self.game_window.destroy()
