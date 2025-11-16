@@ -12,10 +12,14 @@ class SOSLogic(ABC):
         self.player_blue = player_blue 
         self.player_red = player_red
         self.current_turn = player_blue 
-        self.score_count = {self.player_blue : 0, self.player_red: 0} # sets the initial score to zero 
+        self.score_count = {self.player_blue.color : 0, self.player_red.color : 0} # sets the initial score to zero 
     
         self.is_game_over = False
         self.game_mode = ""
+
+        # attempt to get drawing lines on gui 
+        self.blue_lines = []
+        self.red_lines = []
     
     @abstractmethod
     def check_game_over(self):
@@ -27,8 +31,15 @@ class SOSLogic(ABC):
     
     # might need to heavily refactor depending how gui file turns out 
     def making_move(self, row, col, letter): # For human player
-        """Human Player make a move on board"""        
-        current_player_color = self.current_turn.color # get the which players color turn is it 
+        """Human Player make a move on board"""  
+
+        # set the right variables for the current player + color 
+        current_player = self.current_turn      
+        current_player_color = current_player.color # get the which players color turn is it 
+
+        if not self.board.is_cell_empty(row, col):
+            return False, [] # if cell is not empty, invalid move so returns False and there no new lines made
+        
         valid_move = self.board.place(row, col, letter, current_player_color) # current player makes a valid move 
 
         # if current players move make an SOS
@@ -39,59 +50,32 @@ class SOSLogic(ABC):
             # increment current (red or blue) player scored  
             if score_made: 
                 self.score_count[current_player_color] += len(found_sos)
-            
-            # if simple mode when player scores then game over
-            if self.game_mode == "Simple Game":
-                self.is_game_over = True
 
-            # otherwise switch turns in General Game (if sos pattern not made)
+                # adds each players own respective found sos lines to their own list
+                if current_player_color == "Blue":
+                    self.blue_lines.extend(found_sos)
+                else: 
+                    self.red_lines.extend(found_sos)
+            
+            # if simple mode when player makes a score, then game over
+            if self.game_mode == "Simple Game":
+                if score_made:
+                    self.is_game_over = True
+
+                #others switch turns between players 
+                else:
+                    self.switch_turn()
+
+            # otherwise switch turns between players in General Game (if sos pattern not made)
             elif self.game_mode == "General Game":
                 if not score_made: 
                     self.switch_turn()
             
             self.check_game_over()
 
-            #Incredibily doubt this will work but a placement for now for indicating with sos patterns belong to who  
-            gui_line_color = current_player_color.lower()
-            human_lines = [(start, end, gui_line_color) for start, end in found_sos]
-            return human_lines
+            return True, found_sos # returns True for successful move and an sos line found 
         
-        return False
-
-    # might need to heavily refactor depending how gui file turns out 
-    def computers_move(self):
-       """Computer Player make a move on board"""
-       
-       while (isinstance(self.current_turn, ComputerPlayer) and not self.is_game_over):
-        computers_move = self.current_turn.get_move(self.board) # computer gets a valid move
-        
-        if computers_move: 
-            computers_turn = self.current_turn
-            computers_color = self.current_turn.color
-
-            row, col, letter = computers_move # unpack computer move entry 
-            self.board.place(row, col, letter, computers_color) # place computers move on game board
-            made_sos = self.board.check_for_SOS(row, col) # check if computer makes an SOS pattern
-            computer_score = len(made_sos) > 0
-
-            if made_sos:
-                self.score_count[computers_turn] += len(made_sos)
-               
-            if self.game_mode == "Simple Game":
-                self.is_game_over = True 
-
-            elif self.game_mode == "General Game":
-                if not made_sos: 
-                    self.switch_turn()
-            
-            self.check_game_over()
-
-            #Incredibily doubt this will work but a placement for now for indicating with sos patterns belong to who  
-            gui_line_color = computers_color.lower()
-            computer_lines = [(start, end, gui_line_color) for start, end in computer_score]
-            return computer_lines
-       
-        return False    
+        return False, []   
                 
     def switch_turn(self):
         """Switch turns between players after each move"""
@@ -106,6 +90,8 @@ class SOSLogic(ABC):
         self.current_turn = self.player_blue # automatically set the current player to blue 
         self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # reset the score count for players 
         self.is_game_over = False
+        self.blue_lines = []
+        self.red_lines = []
 
 class SimpleMode(SOSLogic):
     def __init__(self, game_board_size, player_blue, player_red):

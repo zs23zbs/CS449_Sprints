@@ -51,6 +51,10 @@ class Board():
         found_SOS= [] 
         current_letter = self.get_letter(row, col)
 
+        # Checks if the letter was placed 
+        if current_letter is None: 
+            return found_SOS
+
         for rd, cd in directions: # row direction = rd, cd = column direction
 
             # when O is in the middle (S - O - S)
