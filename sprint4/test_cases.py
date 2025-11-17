@@ -3,6 +3,8 @@ from board_class import Board
 from player_class import ComputerPlayer
 import random
 
+# All Test Cases pass
+
 def test_computer_finds_horizontal_win():
     """Tests for Computer player to make a S-O-S horizontal win"""
 

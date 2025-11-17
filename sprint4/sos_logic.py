@@ -1,8 +1,6 @@
 from board_class import Board
 from player_class import ComputerPlayer
-from abc import ABC, abstractmethod
-
-# Might need to refactor later, depending on GUI  
+from abc import ABC, abstractmethod  
 
 class SOSLogic(ABC):
     def __init__(self, game_board_size, player_blue, player_red):
