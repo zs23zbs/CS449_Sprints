@@ -72,3 +72,22 @@ def test_computer_does_random_move(monkeypatch):
     # Assert that the move is the one the mocked random returns 
     assert move == (0, 1, "S")
     assert board.is_cell_empty(0,1)
+
+def test_computer_full_board():
+    """Tests the computer player to return None if the board is full """
+
+    board = Board(4)
+    computer_player = ComputerPlayer("Red")
+
+    # Fill all the cells in the board
+    for r in range(4):
+        for c in range(4):
+            board.place(r, c, "O", "Red")
+    
+    # Assert board is all full 
+    assert board.is_full() == True
+
+    move = computer_player.get_move(board)
+
+    # Assert that no move is returned 
+    assert move is None
