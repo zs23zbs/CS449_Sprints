@@ -37,7 +37,7 @@ def test_computer_find_diagonal_win():
     # Assert that the move is completed
     assert move == (3, 3, "S")
 
-def test_computer_player_find_vertical_win():
+def test_computer_find_vertical_win():
     """Tests for Computer player to make a vertical S-O-S win"""
 
     # set up board object
@@ -45,13 +45,13 @@ def test_computer_player_find_vertical_win():
     computer_player = ComputerPlayer("Blue")
 
     # Set up the winning (vertical) pattern
-    board.place(5, 2, "S", "Red")
-    board.place(5, 3, "O", "Blue")
+    board.place(3, 2, "S", "Red")
+    board.place(4, 2, "O", "Blue")
 
     move = computer_player.get_move(board)
 
     # Assert that the move is completed
-    assert move == (5, 4, "S")
+    assert move == (5, 2, "S")
 
 def test_computer_does_random_move(monkeypatch):
     """Tests the computer player to make a random move when no immediate SOS can be done"""
