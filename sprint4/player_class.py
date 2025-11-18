@@ -21,7 +21,7 @@ class HumanPlayer(Player):
         super().__init__(color)
 
     def get_move(self, board):
-        # For now, Handle_click function in GUI should handle human moves 
+        # Handle_click function in GUI handles human moves 
         return None
         
 class ComputerPlayer(Player):
@@ -45,9 +45,9 @@ class ComputerPlayer(Player):
 
                     # Immediate win strategy 
                     for letter in ["S", "O"]:
-                        board.place(row, col, letter, self.color) # place a temporary move
-                        lines = board.check_for_SOS(row, col) # check for SOS pattern
-                        board.unplace(row, col) # CORRECTLY remove the temporary move
+                        board.place(row, col, letter, self.color)
+                        lines = board.check_for_SOS(row, col)
+                        board.unplace(row, col) 
                         if len(lines) > 0: 
                             return (row, col, letter)
                         
@@ -58,8 +58,9 @@ class ComputerPlayer(Player):
                     available_moves.append((row, col, "S"))
                     available_moves.append((row, col, "O"))
        
+        # computer selects a random avialable spot to make a move on 
         if available_moves:
-            computer_move = random.choice(available_moves) # computer selects a random avialable spot to make a move on 
+            computer_move = random.choice(available_moves) 
             return computer_move
         else:
             return None

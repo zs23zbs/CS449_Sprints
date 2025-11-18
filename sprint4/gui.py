@@ -13,8 +13,8 @@ class SOSGame():
         self.start_menu.config(bg="#008B8B")
 
         # Varaibles for start_menu buttons (board size and mode)
-        self.board_size = tk.IntVar(value=3) # default/smallest board size
-        self.mode = tk.StringVar(value="Simple Game") # default game mode
+        self.board_size = tk.IntVar(value=3) 
+        self.mode = tk.StringVar(value="Simple Game")
 
         # For the player type (Human or Computer) selection variables 
         self.blue_player_type = tk.StringVar(value="Human")
@@ -26,11 +26,9 @@ class SOSGame():
         self.red_selection_label = None
         self.blue_selection_label = None
 
-        # For the game lgoic instances
         self.game = None
         self.game_window = None 
         
-        # immediately straight to start menu
         self.create_start_menu()
         self.start_menu.mainloop() 
 
@@ -81,25 +79,21 @@ class SOSGame():
     
     def start_game(self):
         """Starting the game window after players enter settings for SOS Game"""
-
-        self.start_menu.destroy() # close the SOS setup menu 
+        self.start_menu.destroy()
 
         # Create the game window after set up menu 
         self.game_window = tk.Tk()
         self.game_window.title("SOS Game Window")
         self.game_window.config(bg="#008B8B")
 
-        # Get the board size players selected from spinbox
         board_size = self.board_size.get() 
 
-        # Get the players 
         red_type = self.red_player_type.get()
         blue_type = self.blue_player_type.get()
 
         red_player = HumanPlayer("Red") if red_type == "Human" else ComputerPlayer("Red")
         blue_player = HumanPlayer("Blue") if blue_type == "Human" else ComputerPlayer("Blue")
-
-        # Determine the Game mode depending on what players have chosen 
+ 
         game_mode = self.mode.get()
 
         if game_mode == "Simple Game":
@@ -136,7 +130,6 @@ class SOSGame():
         if self.game and player_color == "Blue" and not isinstance(self.game.player_blue, HumanPlayer):
             return None
 
-        # Set the S and O letters to the right players 
         if player_color == "Red":
             self.red_letter_choice.set(letter)
             s_btn = self.red_s_button
@@ -156,7 +149,6 @@ class SOSGame():
             s_btn.config(bg="SystemButtonFace", relief=tk.SUNKEN)
             o_btn.config(bg="#0C530C", relief=tk.RAISED)
 
-        # Visually display the selected letter
         if display_labels:
             display_labels.config(text=f"Selected Letter: {letter}")
 
@@ -203,7 +195,7 @@ class SOSGame():
         self.red_selection_label = tk.Label(red_controls_frame, text=f"Selected Letter: {self.red_letter_choice.get()}", bg="#008B8B", fg="#FFFAFA")
         self.red_selection_label.pack(pady=5)
 
-        # Creating the game board itself
+        # Creating the game board 
         self.board_container = tk.Frame(main_game_area_frame, bg="lightblue", bd=5, relief=tk.RIDGE)
         self.board_container.grid(row=0, column=1, padx=20, pady=10)
 
@@ -278,11 +270,9 @@ class SOSGame():
                 row_buttons.append(button)
             self.board_buttons.append(row_buttons)
 
-    """New/Major Changes for class methods (I probably need) to accommodate for Human and Computer Components"""
     def handle_clicks(self, row, col):
         """Handles the clicks or events for Human Player on the game board"""
 
-        # Display a message for when the game is over 
         if self.game.is_game_over:
             messagebox.showinfo("GAME OVER!", "The SOS Game has ended. Please select NEW GAME, REPLAY GAME, or EXIT GAME")
             return None
@@ -292,8 +282,7 @@ class SOSGame():
         # Current players clicks go through ONLY if current player is the human player 
         if not isinstance(current_player_before_move, HumanPlayer):
             return None 
-        
-        # Set the color letter to whoever is the current player during turn 
+
         if current_player_before_move.color == "Red":
             letter = self.red_letter_choice.get()
         else: 
@@ -301,7 +290,6 @@ class SOSGame():
 
         success, found_sos = self.game.making_move(row, col, letter)
 
-        # if the move was successful, visually update the game state
         if success: 
             self.process_visual_updates(row, col, letter, current_player_before_move.color, found_sos)
 
@@ -325,12 +313,10 @@ class SOSGame():
         blue_score = self.game.score_count.get("Blue", 0)
 
         if self.game.is_game_over:
-            # Game is over, so turn label is updated in end_game() 
             return None
         
         current_player_color = self.game.current_turn.color
 
-        # Creates the text labels to keep track of each players scores during game 
         turn_text = f"Current Turn: {current_player_color}\n"
         turn_text += f"Blue Score: {blue_score} || Red Score: {red_score}"
 
@@ -361,7 +347,7 @@ class SOSGame():
     def process_visual_updates(self, row, col, letter, color, found_sos):
         """Updates the GUI game board and drawing SOS lines  """
 
-        # makes sure that button this position is updated
+        # makes sure that button this positions is updated
         if self.board_buttons and 0 <= row < len(self.board_buttons) and 0 <= col < len(self.board_buttons[0]):
             self.board_buttons[row][col].config(text=letter, fg="black", state=tk.DISABLED)
 
@@ -390,7 +376,7 @@ class SOSGame():
         # attempting to draw the scored sos line 
         self.canvas.create_line(point1_center_x, point1_center_y,
                                 point3_center_x, point3_center_y,
-                                fill=line_color, width=5)
+                                fill=line_color, width=20)
 
     def computer_move_sequence(self):
         """Schedules the conputer to takes its turns with a delay"""

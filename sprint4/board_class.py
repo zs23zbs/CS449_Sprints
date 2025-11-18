@@ -28,14 +28,14 @@ class Board():
     def unplace(self, row, col):
         """Remove the content of a cell, make it empty again"""
         if 0 <= row < self.board_size and 0 <= col < self.board_size:
-            self.game_board[row][col] = None # makes the once occupied cell , empty aka None
+            self.game_board[row][col] = None 
 
     def get_letter(self, row, col):
         """Returns the letter (S or O) from a cell or None"""
         if 0 <= row < self.board_size and 0 <= col < self.board_size:
             content = self.game_board[row][col]
-            if content is not None: # if the cell is not empty 
-                return content[0] # take the letter from tuple (letter, color)
+            if content is not None: 
+                return content[0] 
         return None
 
     # Refactor again, but doubtful 
@@ -51,7 +51,6 @@ class Board():
         found_SOS= [] 
         current_letter = self.get_letter(row, col)
 
-        # Checks if the letter was placed 
         if current_letter is None: 
             return found_SOS
 

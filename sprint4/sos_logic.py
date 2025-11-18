@@ -1,5 +1,4 @@
 from board_class import Board
-from player_class import ComputerPlayer
 from abc import ABC, abstractmethod  
 
 class SOSLogic(ABC):
@@ -14,7 +13,6 @@ class SOSLogic(ABC):
         self.is_game_over = False
         self.game_mode = ""
 
-        # attempt to get drawing lines on gui 
         self.blue_lines = []
         self.red_lines = []
     
@@ -25,24 +23,22 @@ class SOSLogic(ABC):
     @abstractmethod
     def determine_winner(self):
         pass
-    
-    # might need to heavily refactor depending how gui file turns out 
+     
     def making_move(self, row, col, letter): # For human player
         """Human Player make a move on board"""  
 
         # set the right variables for the current player + color 
         current_player = self.current_turn      
-        current_player_color = current_player.color # get the which players color turn is it 
+        current_player_color = current_player.color 
 
         if not self.board.is_cell_empty(row, col):
-            return False, [] # if cell is not empty, invalid move so returns False and there no new lines made
+            return False, []
         
-        valid_move = self.board.place(row, col, letter, current_player_color) # current player makes a valid move 
+        valid_move = self.board.place(row, col, letter, current_player_color) 
 
-        # if current players move make an SOS
         if valid_move:
-            found_sos = self.board.check_for_SOS(row, col) #checks if a sos pattern was found 
-            score_made = len(found_sos) > 0 # boolean if a score was made 
+            found_sos = self.board.check_for_SOS(row, col)  
+            score_made = len(found_sos) > 0 
 
             # increment current (red or blue) player scored  
             if score_made: 
@@ -58,8 +54,6 @@ class SOSLogic(ABC):
             if self.game_mode == "Simple Game":
                 if score_made:
                     self.is_game_over = True
-
-                #others switch turns between players 
                 else:
                     self.switch_turn()
 
@@ -70,7 +64,7 @@ class SOSLogic(ABC):
             
             self.check_game_over()
 
-            return True, found_sos # returns True for successful move and an sos line found 
+            return True, found_sos 
         
         return False, []   
                 
@@ -83,9 +77,9 @@ class SOSLogic(ABC):
 
     def reset(self):
         """Resets the game board"""
-        self.board.reset() # reset the game board 
-        self.current_turn = self.player_blue # automatically set the current player to blue 
-        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} # reset the score count for players 
+        self.board.reset() 
+        self.current_turn = self.player_blue  
+        self.score_count = {self.player_blue.color : 0, self.player_red.color: 0} 
         self.is_game_over = False
         self.blue_lines = []
         self.red_lines = []
@@ -102,7 +96,6 @@ class SimpleMode(SOSLogic):
 
     def determine_winner(self):
         """Simple Mode rule: First player to create an SOS pattern is the winner, otherwise draw"""
-        # sets whose score is who
         red_score = self.score_count["Red"]
         blue_score = self.score_count["Blue"]
 
@@ -111,7 +104,6 @@ class SimpleMode(SOSLogic):
         elif blue_score > 0 and red_score == 0: 
             return "Blue" # blue is the winner 
         
-        # no one or both scored
         return "Draw"
 
 class GeneralMode(SOSLogic):
@@ -126,13 +118,12 @@ class GeneralMode(SOSLogic):
     
     def determine_winner(self):
         """General Mode rule: The player with the highest score (most sos patterns) wins, otherwise draw"""
-        # sets whose score is who
         red_score = self.score_count["Red"]
         blue_score = self.score_count["Blue"]
 
-        if red_score > blue_score: # if red scores more 
-            return "Red" # red wins
-        elif blue_score > red_score: # if blue scores more 
-            return "Blue" # blue wins
+        if red_score > blue_score: 
+            return "Red" 
+        elif blue_score > red_score: 
+            return "Blue" 
         
-        return "Draw" # if niether condition works 
+        return "Draw" 
