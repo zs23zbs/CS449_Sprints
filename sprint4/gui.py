@@ -202,7 +202,7 @@ class SOSGame():
         # Configure the size of game board  
         size = (self.board_size.get()) * 75
         
-        self.canvas = tk.Canvas(self.board_container, width=size, height=size, bg="white", highlightthickness=0)
+        self.canvas = tk.Canvas(self.board_container, width=size, height=size)
         self.canvas.pack(fill="both", expand=True)
 
         # Blue player Info
@@ -261,7 +261,7 @@ class SOSGame():
                     width=6, 
                     height=3,
                     bg="white",
-                    font=("Helvetica", 16, "bold"),
+                    font=("Helvetica", 20, "bold"),
                     command=lambda r=i,  c=j: self.handle_clicks(r,c))
                 
                 x_center = j * cell_width + cell_width / 2
@@ -291,7 +291,7 @@ class SOSGame():
         success, found_sos = self.game.making_move(row, col, letter)
 
         if success: 
-            self.process_visual_updates(row, col, letter, current_player_before_move.color, found_sos)
+            self.process_visual_updates(row, col, letter)
 
             if not self.game.is_game_over:
                 self.update_turn_display()
@@ -344,39 +344,15 @@ class SOSGame():
             else:
                 set_the_control_state(self.blue_s_button, self.blue_o_button, True)
 
-    def process_visual_updates(self, row, col, letter, color, found_sos):
+    def process_visual_updates(self, row, col, letter):
         """Updates the GUI game board and drawing SOS lines  """
 
         # makes sure that button this positions is updated
         if self.board_buttons and 0 <= row < len(self.board_buttons) and 0 <= col < len(self.board_buttons[0]):
             self.board_buttons[row][col].config(text=letter, fg="black", state=tk.DISABLED)
 
-        for start_coords, _, end_coords in found_sos: 
-            self.draw_sos_line(start_coords, end_coords, color.lower())
-
         if self.game.is_game_over:
             self.end_game()
-
-    def draw_sos_line(self, point1, point3, line_color):
-        """ Draws a line over sos pattern connecting the start (point1) and the end (point3)"""
-
-        size = self.game.board.board_size
-
-        # set the cell widths and height 
-        self.canvas.update_idletasks()
-        cell_width = self.canvas.winfo_width() / size
-        cell_height = self.canvas.winfo_height() / size
-        
-        point1_center_x = point1[1] * cell_width + cell_width / 2
-        point1_center_y = point1[0] * cell_height + cell_height / 2
-
-        point3_center_x = point3[1] * cell_width + cell_width / 2
-        point3_center_y = point3[0] * cell_height + cell_height / 2
-
-        # attempting to draw the scored sos line 
-        self.canvas.create_line(point1_center_x, point1_center_y,
-                                point3_center_x, point3_center_y,
-                                fill=line_color, width=20)
 
     def computer_move_sequence(self):
         """Schedules the conputer to takes its turns with a delay"""
@@ -387,12 +363,11 @@ class SOSGame():
         
         current_player = self.game.current_turn
 
-        # only human player controls are enabled if its noth the computers turn 
+        # only human player controls are enabled if its both the computers turn 
         if not isinstance(current_player, ComputerPlayer):
-            self.update_player_controls() # this ensures that ONLY the human controls are enabled 
+            self.update_player_controls() 
             return None
         
-        # go here, computers turns
         self.update_player_controls() # disable human controls
 
         # Schedule move with a delay 
@@ -401,7 +376,7 @@ class SOSGame():
     def execute_computer_moves(self):
         """Execute the computers turn with a delay"""
 
-        # still check if game has ended while waiting for the delay 
+        # check if game has ended while waiting for the delay 
         if self.game.is_game_over or not isinstance(self.game.current_turn, ComputerPlayer):
             self.update_player_controls()
             return None
@@ -412,19 +387,18 @@ class SOSGame():
 
         # if it's the computers turn to make a move
         if computer_move:
-            row, col, letter = computer_move # unpack the tuple of the computer's move 
+            row, col, letter = computer_move 
             
             success, found_sos = self.game.making_move(row, col, letter)
 
             # if the move, on computers turn was a success
             if success:
-                self.process_visual_updates(row, col, letter, current_player.color, found_sos)
+                self.process_visual_updates(row, col, letter)
                 self.update_turn_display()
                 self.update_player_controls()
 
                 # Checks the game state after computer move was done
                 # if still computers move (aka General Mode or Computer vs Computer)
-                # schedule the next computer move immeidately 
                 if not self.game.is_game_over and isinstance(self.game.current_turn, ComputerPlayer):
                     self.computer_move_sequence()
 
@@ -436,12 +410,10 @@ class SOSGame():
 
     def reset_game(self):
         """Reset the game"""
-
-        # reset the game state 
+ 
         if self.game:
             self.game.reset()
 
-        # redraw the game board & destroy old buttons + create new ones
         if self.game_window and self.game: 
             self.create_board(self.game.board.board_size)
 
@@ -456,7 +428,6 @@ class SOSGame():
 
     def end_game(self):
         """Determine the winner of the game"""
-        winner = self.game.determine_winner()
 
         self.update_turn_display()
         self.update_player_controls()
