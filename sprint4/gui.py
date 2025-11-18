@@ -272,10 +272,6 @@ class SOSGame():
 
     def handle_clicks(self, row, col):
         """Handles the clicks or events for Human Player on the game board"""
-
-        if self.game.is_game_over:
-            messagebox.showinfo("GAME OVER!", "The SOS Game has ended. Please select NEW GAME, REPLAY GAME, or EXIT GAME")
-            return None
         
         current_player_before_move = self.game.current_turn
 
@@ -288,7 +284,7 @@ class SOSGame():
         else: 
             letter = self.blue_letter_choice.get()
 
-        success, found_sos = self.game.making_move(row, col, letter)
+        success = self.game.making_move(row, col, letter)
 
         if success: 
             self.process_visual_updates(row, col, letter)
@@ -302,8 +298,6 @@ class SOSGame():
                 # start the computers move sequence with a slight delay 
                 if isinstance(current_player_before_move, ComputerPlayer):
                     self.game_window.after(60, self.computer_move_sequence)
-        else: 
-            messagebox.showerror("Invalid Move!", "Selected CELL is occupied!")
 
     def update_turn_display(self):
         """Updates turn labels and scores"""
@@ -345,11 +339,10 @@ class SOSGame():
                 set_the_control_state(self.blue_s_button, self.blue_o_button, True)
 
     def process_visual_updates(self, row, col, letter):
-        """Updates the GUI game board and drawing SOS lines  """
+        """Updates the GUI game board"""
 
-        # makes sure that button this positions is updated
         if self.board_buttons and 0 <= row < len(self.board_buttons) and 0 <= col < len(self.board_buttons[0]):
-            self.board_buttons[row][col].config(text=letter, fg="black", state=tk.DISABLED)
+            self.board_buttons[row][col].config(text=letter, state=tk.DISABLED)
 
         if self.game.is_game_over:
             self.end_game()
@@ -385,20 +378,17 @@ class SOSGame():
 
         computer_move = current_player.get_move(self.game.board)
 
-        # if it's the computers turn to make a move
         if computer_move:
             row, col, letter = computer_move 
             
-            success, found_sos = self.game.making_move(row, col, letter)
+            success = self.game.making_move(row, col, letter)
 
-            # if the move, on computers turn was a success
             if success:
                 self.process_visual_updates(row, col, letter)
                 self.update_turn_display()
                 self.update_player_controls()
 
-                # Checks the game state after computer move was done
-                # if still computers move (aka General Mode or Computer vs Computer)
+                # Checks the game state after computer move was done & if still computers move (aka General Mode or Computer vs Computer)
                 if not self.game.is_game_over and isinstance(self.game.current_turn, ComputerPlayer):
                     self.computer_move_sequence()
 
