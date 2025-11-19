@@ -40,7 +40,6 @@ class ComputerPlayer(Player):
         # Iterate through all the rows and columns of board game 
         for row in range(board.board_size):
             for col in range(board.board_size):
-                # if the cell in board is empty, make cell available for a move
                 if board.is_cell_empty(row, col): 
 
                     # Immediate win strategy 
