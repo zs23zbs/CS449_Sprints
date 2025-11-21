@@ -1,5 +1,3 @@
-# Must refactor before implementing Sprint5 
-# Follow Basic Refactoring Principles 
 class Board():
     def __init__(self, board_size):
         """Initiate the 2d nested list for board"""
